@@ -35,12 +35,12 @@ class CarTH
     /**
      * @ORM\ManyToOne(targetEntity=transmission::class, inversedBy="carTHs")
      */
-    private $transmissionType;
+    private $carTransmissionType;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $transmission;
+    private $carTransmission;
 
     /**
      * @ORM\Column(type="float")
@@ -68,9 +68,9 @@ class CarTH
     private $gears;
 
     /**
-     * @ORM\ManyToOne(targetEntity=driveSystem::class, inversedBy="carTHs")
+     * @ORM\ManyToOne(targetEntity=DriveSystem::class, inversedBy="carTHs")
      */
-    private $driveSystem;
+    private $carDriveSystem;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -78,9 +78,9 @@ class CarTH
     private $maxBioFuel;
 
     /**
-     * @ORM\ManyToOne(targetEntity=fuel::class, inversedBy="carTHs")
+     * @ORM\ManyToOne(targetEntity=Fuel::class, inversedBy="carTHs")
      */
-    private $fuel;
+    private $carFuel;
 
     /**
      * @ORM\Column(type="integer")
@@ -127,6 +127,21 @@ class CarTH
      */
     private $combinedCarbon;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=CarType::class, inversedBy="carTHs")
+     */
+    private $carTypeId;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $priceNew;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $priceUsed;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -170,24 +185,24 @@ class CarTH
 
     public function getTransmissionType(): ?transmission
     {
-        return $this->transmissionType;
+        return $this->carTransmissionType;
     }
 
-    public function setTransmissionType(?transmission $transmissionType): self
+    public function setTransmissionType(?transmission $carTransmissionType): self
     {
-        $this->transmissionType = $transmissionType;
+        $this->carTransmissionType = $carTransmissionType;
 
         return $this;
     }
 
     public function getTransmission(): ?string
     {
-        return $this->transmission;
+        return $this->carTransmission;
     }
 
-    public function setTransmission(?string $transmission): self
+    public function setTransmission(?string $carTransmission): self
     {
-        $this->transmission = $transmission;
+        $this->carTransmission = $carTransmission;
 
         return $this;
     }
@@ -254,12 +269,12 @@ class CarTH
 
     public function getDriveSystem(): ?driveSystem
     {
-        return $this->driveSystem;
+        return $this->carDriveSystem;
     }
 
-    public function setDriveSystem(?driveSystem $driveSystem): self
+    public function setDriveSystem(?driveSystem $carDriveSystem): self
     {
-        $this->driveSystem = $driveSystem;
+        $this->carDriveSystem = $carDriveSystem;
 
         return $this;
     }
@@ -278,12 +293,12 @@ class CarTH
 
     public function getFuel(): ?fuel
     {
-        return $this->fuel;
+        return $this->carFuel;
     }
 
-    public function setFuel(?fuel $fuel): self
+    public function setFuel(?fuel $carFuel): self
     {
-        $this->fuel = $fuel;
+        $this->carFuel = $carFuel;
 
         return $this;
     }
@@ -392,6 +407,42 @@ class CarTH
     public function setCombinedCarbon(float $combinedCarbon): self
     {
         $this->combinedCarbon = $combinedCarbon;
+
+        return $this;
+    }
+
+    public function getCarTypeId(): ?carType
+    {
+        return $this->carTypeId;
+    }
+
+    public function setCarTypeId(?carType $carTypeId): self
+    {
+        $this->carTypeId = $carTypeId;
+
+        return $this;
+    }
+
+    public function getPriceNew(): ?int
+    {
+        return $this->priceNew;
+    }
+
+    public function setPriceNew(int $priceNew): self
+    {
+        $this->priceNew = $priceNew;
+
+        return $this;
+    }
+
+    public function getPriceUsed(): ?int
+    {
+        return $this->priceUsed;
+    }
+
+    public function setPriceUsed(int $priceUsed): self
+    {
+        $this->priceUsed = $priceUsed;
 
         return $this;
     }

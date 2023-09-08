@@ -21,6 +21,17 @@ class CarTHRepository extends ServiceEntityRepository
         parent::__construct($registry, CarTH::class);
     }
 
+    
+   public function findOneById($id): ?CarTH
+   {
+       return $this->createQueryBuilder('c')
+           ->andWhere('c.id = :id')
+           ->setParameter('id', $id)
+           ->getQuery()
+           ->getOneOrNullResult()
+       ;
+   }
+
     public function add(CarTH $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -53,14 +64,4 @@ class CarTHRepository extends ServiceEntityRepository
 //            ->getResult()
 //        ;
 //    }
-
-   public function findOneById($id): ?CarTH
-   {
-       return $this->createQueryBuilder('c')
-           ->andWhere('c.id = :id')
-           ->setParameter('id', $id)
-           ->getQuery()
-           ->getOneOrNullResult()
-       ;
-   }
 }

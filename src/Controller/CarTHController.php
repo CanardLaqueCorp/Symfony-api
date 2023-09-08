@@ -5,31 +5,29 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Response;
 use App\Entity\CarTH;
 use App\Repository\CarTHRepository;
 
 class CarTHController extends AbstractController
 {
     /**
-     * @Route("/car/th", name="app_car_th")
+     * @Route("/car/th/{id}", name="get_car_by_id")
      */
-    public function index(): JsonResponse
+    public function getById(CarTHREpository $carTHRepo, $id = null): JsonResponse
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/CarTHController.php',
-        ]);
-    }
+        $car = $carTHRepo -> findOneById($id);
 
-    public function getById($id = 1): JsonResponse
-    {
-        // $carTH = $this->getDoctrine()->getRepository(CarTH::class)->findOneById($id);
+        if($car == null) {
+            return $this->json([
+                'response' => 'notFound'
+            ]);
+        }
 
         return $this->json([
-            'id' => $id,
-            // 'brand' => $carTH->getBrand(),
-            // 'model' => $carTH->getModel(),
+            'response' => 'ok',
+            'id' => $car->getId(),
+            'brand' => $car->getBrand(),
+            'model' => $car->getModel(),
         ]);
         
     }
