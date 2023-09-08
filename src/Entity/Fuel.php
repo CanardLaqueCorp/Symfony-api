@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\TransmissionRepository;
+use App\Repository\FuelRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=TransmissionRepository::class)
+ * @ORM\Entity(repositoryClass=FuelRepository::class)
  */
-class Transmission
+class Fuel
 {
     /**
      * @ORM\Id
@@ -30,7 +30,7 @@ class Transmission
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity=CarTH::class, mappedBy="transmissionType")
+     * @ORM\OneToMany(targetEntity=CarTH::class, mappedBy="fuel")
      */
     private $carTHs;
 
@@ -80,7 +80,7 @@ class Transmission
     {
         if (!$this->carTHs->contains($carTH)) {
             $this->carTHs[] = $carTH;
-            $carTH->setTransmissionType($this);
+            $carTH->setFuel($this);
         }
 
         return $this;
@@ -90,8 +90,8 @@ class Transmission
     {
         if ($this->carTHs->removeElement($carTH)) {
             // set the owning side to null (unless already changed)
-            if ($carTH->getTransmissionType() === $this) {
-                $carTH->setTransmissionType(null);
+            if ($carTH->getFuel() === $this) {
+                $carTH->setFuel(null);
             }
         }
 
