@@ -16,7 +16,7 @@ class CarTHController extends AbstractController
     public function getById(CarTHRepository $carTHRepo, $id = null): JsonResponse
     {
         // Si l'id n'est pas spécifié on renvoie toutes les voitures thermiques
-        if ($id = null) {
+        if ($id == null) {
             // $cars = $carTHRepo->findAll();
 
             return $this->json([
