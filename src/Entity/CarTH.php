@@ -33,7 +33,7 @@ class CarTH
     private $cylinder;
 
     /**
-     * @ORM\ManyToOne(targetEntity=transmission::class, inversedBy="carTHs")
+     * @ORM\ManyToOne(targetEntity=Transmission::class, inversedBy="carTHs")
      */
     private $carTransmissionType;
 
@@ -130,7 +130,7 @@ class CarTH
     /**
      * @ORM\ManyToOne(targetEntity=CarType::class, inversedBy="carTHs")
      */
-    private $carTypeId;
+    private $carLineType;
 
     /**
      * @ORM\Column(type="integer")
@@ -183,12 +183,12 @@ class CarTH
         return $this;
     }
 
-    public function getTransmissionType(): ?transmission
+    public function getTransmissionType(): ? Transmission
     {
         return $this->carTransmissionType;
     }
 
-    public function setTransmissionType(?transmission $carTransmissionType): self
+    public function setTransmissionType(?Transmission $carTransmissionType): self
     {
         $this->carTransmissionType = $carTransmissionType;
 
@@ -243,12 +243,12 @@ class CarTH
         return $this;
     }
 
-    public function isHasGuzzler(): ?bool
+    public function hasGuzzler(): ?bool
     {
         return $this->hasGuzzler;
     }
 
-    public function setHasGuzzler(?bool $hasGuzzler): self
+    public function setGuzzler(?bool $hasGuzzler): self
     {
         $this->hasGuzzler = $hasGuzzler;
 
@@ -267,12 +267,12 @@ class CarTH
         return $this;
     }
 
-    public function getDriveSystem(): ?driveSystem
+    public function getDriveSystem(): ?DriveSystem
     {
         return $this->carDriveSystem;
     }
 
-    public function setDriveSystem(?driveSystem $carDriveSystem): self
+    public function setDriveSystem(?DriveSystem $carDriveSystem): self
     {
         $this->carDriveSystem = $carDriveSystem;
 
@@ -291,12 +291,12 @@ class CarTH
         return $this;
     }
 
-    public function getFuel(): ?fuel
+    public function getFuel(): ?Fuel
     {
         return $this->carFuel;
     }
 
-    public function setFuel(?fuel $carFuel): self
+    public function setFuel(?Fuel $carFuel): self
     {
         $this->carFuel = $carFuel;
 
@@ -327,12 +327,12 @@ class CarTH
         return $this;
     }
 
-    public function isHasStartAndStop(): ?bool
+    public function hasStartAndStop(): ?bool
     {
         return $this->hasStartAndStop;
     }
 
-    public function setHasStartAndStop(bool $hasStartAndStop): self
+    public function setStartAndStop(bool $hasStartAndStop): self
     {
         $this->hasStartAndStop = $hasStartAndStop;
 
@@ -411,14 +411,14 @@ class CarTH
         return $this;
     }
 
-    public function getCarTypeId(): ?carType
+    public function getCarType(): ?CarType
     {
-        return $this->carTypeId;
+        return $this->carLineType;
     }
 
-    public function setCarTypeId(?carType $carTypeId): self
+    public function setCarType(?CarType $carLineType): self
     {
-        $this->carTypeId = $carTypeId;
+        $this->carLineType = $carLineType;
 
         return $this;
     }
@@ -445,5 +445,36 @@ class CarTH
         $this->priceUsed = $priceUsed;
 
         return $this;
+    }
+
+    public function getDataAll() {
+        return array(
+            'id' => $this->getId(),
+            'brand' => $this->getBrand(),
+            'model' => $this->getModel(),
+            // 'carTypeId' => $this->getCarType(),
+            'priceNew' => $this->getPriceNew(),
+            'priceUsed' => $this->getPriceUsed(),
+            'cylinder' => $this->getCylinder(),
+            // 'transmissionType' => $this->getTransmissionType(),
+            'transmission' => $this->getTransmission(),
+            'gears' => $this->getGears(),
+            // 'driveSystem' => $this->getDriveSystem(),
+            // 'fuel' => $this->getFuel(),
+            'maxBioFuel' => $this->getMaxBioFuel(),
+            'hasStartAndStop' => $this->hasStartAndStop(),
+            'cityFuel' => $this->getCityFuel(),
+            'cityCarbon' => $this->getCityCarbon(),
+            'highwayFuel' => $this->getHighwayFuel(),
+            'highwayCarbon' => $this->getHighwayCarbon(),
+            'combinedFuel' => $this->getCombinedFuel(),
+            'combinedCarbon' => $this->getCombinedCarbon(),
+            'hasGuzzler' => $this->hasGuzzler(),
+            'annualFuelCost' => $this->getAnnualFuelCost(),
+            'spendOnFiveYears' => $this->getSpendOnFiveYears(),
+            'feRating' => $this->getFeRating(),
+            'ghgRating' => $this->getGhgRating(),
+            'smogRating' => $this->getSmogRating()
+        );
     }
 }
