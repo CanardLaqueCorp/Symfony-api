@@ -11,14 +11,13 @@ class CarTHController extends AbstractController
 {
 
     /**
-     * @Route("/car/th/{id}", name="get_car_th")
+     * @Route("/car/th/{id}", name="get_car_th_by_id", methods={"GET"})
      */
     public function getById(CarTHRepository $carRepo, $id = null): JsonResponse
     {
         // Si l'id n'est pas spécifié on renvoie toutes les voitures thermiques
         if ($id == null) {
             $cars = $carRepo->findAll();
-
 
             if ($cars != null) {
                 $carsRes = array();
@@ -36,10 +35,10 @@ class CarTHController extends AbstractController
                 ]);
             }            
         }
-        // Sinon on recherche la voiture correspondant à l'id
+        // Sinon on renvoie la voiture correspondant à l'id
         else {
 
-            $car = $carRepo->findOneById($id);
+            $car = $carRepo->find($id);
             
             if($car == null) {
                 return $this->json([
