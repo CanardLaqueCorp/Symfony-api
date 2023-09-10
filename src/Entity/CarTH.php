@@ -20,11 +20,6 @@ class CarTH
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $brand;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $model;
 
     /**
@@ -147,21 +142,14 @@ class CarTH
      */
     private $ecoScore;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="carThs")
+     */
+    private $carBrand;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getBrand(): ?string
-    {
-        return $this->brand;
-    }
-
-    public function setBrand(string $brand): self
-    {
-        $this->brand = $brand;
-
-        return $this;
     }
 
     public function getModel(): ?string
@@ -455,7 +443,7 @@ class CarTH
     public function getDataAll() {
         return array(
             'id' => $this->getId(),
-            'brand' => $this->getBrand(),
+            'brand' => $this->getCarBrand()->getLabel(),
             'model' => $this->getModel(),
             'carTypeId' => $this->getCarType()->getId(),
             'carType' => $this->getCarType()->getLabel(),
@@ -499,6 +487,18 @@ class CarTH
     public function setEcoScore(?int $ecoScore): self
     {
         $this->ecoScore = $ecoScore;
+
+        return $this;
+    }
+
+    public function getCarBrand(): ?Brand
+    {
+        return $this->carBrand;
+    }
+
+    public function setCarBrand(?Brand $carBrand): self
+    {
+        $this->carBrand = $carBrand;
 
         return $this;
     }

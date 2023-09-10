@@ -17,7 +17,7 @@ class CarTHController extends AbstractController
     {
         // Si l'id n'est pas spécifié on renvoie toutes les voitures thermiques
         if ($id == null) {
-            $cars = $carRepo->findAll();
+            $cars = $carRepo->findBy([], ['ecoScore' => 'DESC']);
 
             if ($cars != null) {
                 $carsRes = array();
