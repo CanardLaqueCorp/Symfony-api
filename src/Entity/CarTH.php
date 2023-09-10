@@ -142,6 +142,11 @@ class CarTH
      */
     private $priceUsed;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $ecoScore;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -481,7 +486,20 @@ class CarTH
             'spendOnFiveYears' => $this->getSpendOnFiveYears(),
             'feRating' => $this->getFeRating(),
             'ghgRating' => $this->getGhgRating(),
-            'smogRating' => $this->getSmogRating()
+            'smogRating' => $this->getSmogRating(),
+            'ecoScore' => $this->getEcoScore()
         );
+    }
+
+    public function getEcoScore(): ?int
+    {
+        return $this->ecoScore;
+    }
+
+    public function setEcoScore(?int $ecoScore): self
+    {
+        $this->ecoScore = $ecoScore;
+
+        return $this;
     }
 }
