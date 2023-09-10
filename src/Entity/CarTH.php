@@ -443,6 +443,7 @@ class CarTH
     public function getDataAll() {
         return array(
             'id' => $this->getId(),
+            'brandId' => $this->getCarBrand()->getId(),
             'brand' => $this->getCarBrand()->getLabel(),
             'model' => $this->getModel(),
             'carTypeId' => $this->getCarType()->getId(),
