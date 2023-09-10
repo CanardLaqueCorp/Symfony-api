@@ -63,7 +63,7 @@ class CarType
     {
         if (!$this->carTHs->contains($carTH)) {
             $this->carTHs[] = $carTH;
-            $carTH->setCarTypeId($this);
+            $carTH->setCarType($this);
         }
 
         return $this;
@@ -73,8 +73,8 @@ class CarType
     {
         if ($this->carTHs->removeElement($carTH)) {
             // set the owning side to null (unless already changed)
-            if ($carTH->getCarTypeId() === $this) {
-                $carTH->setCarTypeId(null);
+            if ($carTH->getCarType() === $this) {
+                $carTH->setCarType(null);
             }
         }
 
