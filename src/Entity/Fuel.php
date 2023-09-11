@@ -30,7 +30,7 @@ class Fuel
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity=CarTH::class, mappedBy="fuel")
+     * @ORM\OneToMany(targetEntity=CarTH::class, mappedBy="carFuel")
      */
     private $carTHs;
 
