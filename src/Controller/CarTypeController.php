@@ -18,4 +18,45 @@ class CarTypeController extends AbstractController
             'path' => 'src/Controller/CarTypeController.php',
         ]);
     }
+    
+    public function getById(CarTypeRepository $carTypeRepo, $id = "all"): JsonResponse
+    {
+        if ($id == "all") {
+            $carTypes = $carTypeRepo->findAll([], ['label' => 'ASC']);
+
+            if ($carTypes != null) {
+                $carTypesRes = array();
+                foreach ($carTypes as $carType) {
+                    $carTypesRes[] = $carType->getDataAll();
+                }
+                return $this->json([
+                    'response' => 'ok',
+                    'result' => $carTypesRes
+                ]);
+            }
+            else {
+                return $this->json([
+                    'response' => 'notFound'
+                ]);
+            }            
+        }
+        else {
+
+            $carType = $carTypeRepo->find($id);
+            
+            if($carType == null) {
+                return $this->json([
+                    'response' => 'notFound'
+                ]);
+            }
+
+            $data = $carType->getDataAll();
+            
+            return $this->json([
+                'response' => 'ok',
+                'result' => $data
+            ]);
+        }
+
+    }
 }
