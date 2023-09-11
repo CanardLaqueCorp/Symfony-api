@@ -15,7 +15,7 @@ class BrandController extends AbstractController
     public function getById(BrandRepository $brandRepo, $id = "all"): JsonResponse
     {
         if ($id == "all") {
-            $brands = $brandRepo->findAll();
+            $brands = $brandRepo->findAll([], ['label' => 'ASC']);
 
             if ($brands != null) {
                 $brandsRes = array();
