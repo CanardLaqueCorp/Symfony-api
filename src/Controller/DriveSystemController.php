@@ -5,20 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use  App\Repository\DriveSystemRepository;
 
 class DriveSystemController extends AbstractController
 {
     /**
-     * @Route("/drive/system", name="app_drive_system")
+     * @Route("/get/drive/system/{id}", name="get_drive_system_by_id", methods={"GET"})
      */
-    public function index(): JsonResponse
-    {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/DriveSystemController.php',
-        ]);
-    }
-
     public function getById(DriveSystemRepository $driveSystemRepo, $id = "all"): JsonResponse
     {
         if ($id == "all") {
