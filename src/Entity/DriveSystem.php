@@ -101,6 +101,7 @@ class DriveSystem
      public function getDataAll() {
         $data = array(
             'id' => $this->getId(),
+            'code' => $this->getCode(),
             'label' => $this->getLabel(),
             'carsNb' => 0
         );
