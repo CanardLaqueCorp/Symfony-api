@@ -18,4 +18,45 @@ class DriveSystemController extends AbstractController
             'path' => 'src/Controller/DriveSystemController.php',
         ]);
     }
+
+    public function getById(DriveSystemRepository $driveSystemRepo, $id = "all"): JsonResponse
+    {
+        if ($id == "all") {
+            $driveSystems = $driveSystemRepo->findAll([], ['label' => 'ASC']);
+
+            if ($driveSystems != null) {
+                $driveSystems = array();
+                foreach ($driveSystems as $driveSystem) {
+                    $driveSystemsRes[] = $driveSystem->getDataAll();
+                }
+                return $this->json([
+                    'response' => 'ok',
+                    'result' => $driveSystemsRes
+                ]);
+            }
+            else {
+                return $this->json([
+                    'response' => 'notFound'
+                ]);
+            }            
+        }
+        else {
+
+            $driveSystem = $driveSystemRepo->find($id);
+            
+            if($driveSystem == null) {
+                return $this->json([
+                    'response' => 'notFound'
+                ]);
+            }
+
+            $data = $driveSystem->getDataAll();
+            
+            return $this->json([
+                'response' => 'ok',
+                'result' => $data
+            ]);
+        }
+
+    }
 }
