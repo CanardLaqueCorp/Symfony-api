@@ -97,4 +97,18 @@ class DriveSystem
 
         return $this;
     }
+
+     public function getDataAll() {
+        $data = array(
+            'id' => $this->getId(),
+            'label' => $this->getLabel(),
+            'carsNb' => 0
+        );
+
+        foreach($this->getCarThs() as $car) {
+            $data['carsNb'] += 1;
+        }
+
+        return $data;
+    }
 }
