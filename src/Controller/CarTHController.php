@@ -11,7 +11,7 @@ class CarTHController extends AbstractController
 {
 
     /**
-     * @Route("/car/th/{id}/{data}", name="get_car_th_by_id", methods={"GET"})
+     * @Route("/get/car/th/{id}/{data}", name="get_car_th_by_id", methods={"GET"})
      */
     public function getById(CarTHRepository $carRepo, $id = "all", $data = "all"): JsonResponse
     {
