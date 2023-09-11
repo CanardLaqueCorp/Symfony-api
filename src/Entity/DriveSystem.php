@@ -30,7 +30,7 @@ class DriveSystem
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity=CarTH::class, mappedBy="driveSystem")
+     * @ORM\OneToMany(targetEntity=CarTH::class, mappedBy="carDriveSystem")
      */
     private $carTHs;
 

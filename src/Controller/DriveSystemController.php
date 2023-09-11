@@ -18,7 +18,7 @@ class DriveSystemController extends AbstractController
             $driveSystems = $driveSystemRepo->findAll([], ['label' => 'ASC']);
 
             if ($driveSystems != null) {
-                $driveSystems = array();
+                $driveSystemsRes = array();
                 foreach ($driveSystems as $driveSystem) {
                     $driveSystemsRes[] = $driveSystem->getDataAll();
                 }
