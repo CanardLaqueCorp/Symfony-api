@@ -462,6 +462,7 @@ class CarTH
             'fuelId' => $this->getFuel()->getId(),
             'fuelCode' => $this->getFuel()->getCode(),
             'fuel' => $this->getFuel()->getLabel(),
+            'fuelDetail' => $this->getFuel()->getDetail(),
             'maxBioFuel' => $this->getMaxBioFuel(),
             'hasStartAndStop' => $this->hasStartAndStop(),
             'cityFuel' => $this->getCityFuel(),
@@ -476,6 +477,18 @@ class CarTH
             'feRating' => $this->getFeRating(),
             'ghgRating' => $this->getGhgRating(),
             'smogRating' => $this->getSmogRating(),
+            'ecoScore' => $this->getEcoScore()
+        );
+    }
+
+    public function getDataLight() {
+        return array(
+            'id' => $this->getId(),
+            'brand' => $this->getCarBrand()->getLabel(),
+            'model' => $this->getModel(),
+            'carType' => $this->getCarType()->getLabel(),
+            'fuel' => $this->getFuel()->getLabel(),
+            'annualFuelCost' => $this->getAnnualFuelCost(),
             'ecoScore' => $this->getEcoScore()
         );
     }

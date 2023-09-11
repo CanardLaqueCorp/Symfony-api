@@ -34,6 +34,11 @@ class Fuel
      */
     private $carTHs;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $detail;
+
     public function __construct()
     {
         $this->carTHs = new ArrayCollection();
@@ -94,6 +99,18 @@ class Fuel
                 $carTH->setFuel(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDetail(): ?string
+    {
+        return $this->detail;
+    }
+
+    public function setDetail(string $detail): self
+    {
+        $this->detail = $detail;
 
         return $this;
     }

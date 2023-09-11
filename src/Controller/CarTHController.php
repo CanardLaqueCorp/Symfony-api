@@ -11,18 +11,21 @@ class CarTHController extends AbstractController
 {
 
     /**
-     * @Route("/car/th/{id}", name="get_car_th_by_id", methods={"GET"})
+     * @Route("/car/th/{id}/{data}", name="get_car_th_by_id", methods={"GET"})
      */
-    public function getById(CarTHRepository $carRepo, $id = null): JsonResponse
+    public function getById(CarTHRepository $carRepo, $id = "all", $data = "all"): JsonResponse
     {
-        // Si l'id n'est pas spécifié on renvoie toutes les voitures thermiques
-        if ($id == null) {
+        if ($id == "all") {
             $cars = $carRepo->findBy([], ['ecoScore' => 'DESC']);
 
             if ($cars != null) {
                 $carsRes = array();
                 foreach ($cars as $car) {
-                    $carsRes[] = $car->getDataAll();
+                    if($data == 'light') {
+                        $carsRes[] = $car->getDataLight();
+                    } else {
+                        $carsRes[] = $car->getDataAll();
+                    }
                 }
                 return $this->json([
                     'response' => 'ok',
@@ -35,7 +38,6 @@ class CarTHController extends AbstractController
                 ]);
             }            
         }
-        // Sinon on renvoie la voiture correspondant à l'id
         else {
 
             $car = $carRepo->find($id);
@@ -45,10 +47,16 @@ class CarTHController extends AbstractController
                     'response' => 'notFound'
                 ]);
             }
+
+            if($data == 'light') {
+                $data = $car->getDataLight();
+            } else {
+                $data = $car->getDataAll();
+            }
             
             return $this->json([
                 'response' => 'ok',
-                'result' => $car->getDataAll()
+                'result' => $data
             ]);
         }
     }
