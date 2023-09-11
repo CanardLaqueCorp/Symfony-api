@@ -25,7 +25,7 @@ class CarType
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity=CarTH::class, mappedBy="carTypeId")
+     * @ORM\OneToMany(targetEntity=CarTH::class, mappedBy="carLineType")
      */
     private $carTHs;
 
