@@ -97,4 +97,19 @@ class Transmission
 
         return $this;
     }
+
+    public function getDataAll() {
+        $data = array(
+            'id' => $this->getId(),
+            'code' => $this->getCode(),
+            'label' => $this->getLabel(),
+            'carsNb' => 0
+        );
+
+        foreach($this->getCarThs() as $car) {
+            $data['carsNb'] += 1;
+        }
+
+        return $data;
+    }
 }
