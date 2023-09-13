@@ -18,7 +18,7 @@ class CarPrice
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=CarTh::class, inversedBy="carPrices")
+     * @ORM\ManyToOne(targetEntity=CarTH::class, inversedBy="carPrices")
      */
     private $car;
 
@@ -42,12 +42,12 @@ class CarPrice
         return $this->id;
     }
 
-    public function getCar(): ?CarTh
+    public function getCar(): ?CarTH
     {
         return $this->car;
     }
 
-    public function setRelation(?CarTh $car): self
+    public function setRelation(?CarTH $car): self
     {
         $this->car = $car;
 
@@ -88,5 +88,14 @@ class CarPrice
         $this->year = $year;
 
         return $this;
+    }
+
+    public function getDataAll() {
+        return [
+            'id' => $this->getId(),
+            'price' => $this->getPrice(),
+            'mileage' => $this->getMileage(),
+            'year' => $this->getYear()
+        ];
     }
 }

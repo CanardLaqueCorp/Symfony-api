@@ -150,7 +150,7 @@ class CarTH
     private $carBrand;
 
     /**
-     * @ORM\OneToMany(targetEntity=CarPrice::class, mappedBy="relation")
+     * @ORM\OneToMany(targetEntity=CarPrice::class, mappedBy="car")
      */
     private $carPrices;
 

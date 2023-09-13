@@ -6,12 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CarTHRepository;
+use App\Repository\CarPriceRepository;
 
 class CarTHController extends AbstractController
 {
 
     /**
-     * @Route("/get/car/th/{id}/{data}", name="get_car_th_by_id", methods={"GET"})
+     * @Route("/get/car/{id}/{data}", name="get_car_by_id", methods={"GET"})
      */
     public function getById(CarTHRepository $carRepo, $id = "all", $data = "all"): JsonResponse
     {
@@ -57,6 +58,28 @@ class CarTHController extends AbstractController
             return $this->json([
                 'response' => 'ok',
                 'result' => $data
+            ]);
+        }
+    }
+
+    /**
+     * @Route("/get/prices/{id}", name="get_prices_by_car_id", methods={"GET"})
+     */
+    public function getPricesById(CarTHRepository $carRepo, $id = null) {
+        if ($id == null)
+        {
+            return $this->json([
+                'response' => 'notFound'
+            ]);
+        } else {
+            $prices = $carRepo->find($id)->getCarPrices();
+            $res = array();
+            foreach ($prices as $price) {
+                $res[] = $price->getDataAll();
+            }
+            return $this->json([
+                'response' => 'ok',
+                'result' => $res
             ]);
         }
     }
