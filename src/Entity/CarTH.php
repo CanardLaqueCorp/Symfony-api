@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CarTHRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -146,6 +148,16 @@ class CarTH
      * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="carThs")
      */
     private $carBrand;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CarPrice::class, mappedBy="relation")
+     */
+    private $carPrices;
+
+    public function __construct()
+    {
+        $this->carPrices = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -418,7 +430,7 @@ class CarTH
 
     public function getPriceNew(): ?int
     {
-        return $this->priceNew;
+        return $this->priceNew == 0 ? null : $this->priceNew;
     }
 
     public function setPriceNew(int $priceNew): self
@@ -430,7 +442,7 @@ class CarTH
 
     public function getPriceUsed(): ?int
     {
-        return $this->priceUsed;
+        return ($this->priceUsed == 0) ? null : $this->priceUsed;
     }
 
     public function setPriceUsed(int $priceUsed): self
@@ -446,6 +458,7 @@ class CarTH
             'brandId' => $this->getCarBrand()->getId(),
             'brand' => $this->getCarBrand()->getLabel(),
             'model' => $this->getModel(),
+            'usedPrice' => $this->getPriceUsed(),
             'carTypeId' => $this->getCarType()->getId(),
             'carType' => $this->getCarType()->getLabel(),
             'priceNew' => $this->getPriceNew(),
@@ -486,6 +499,7 @@ class CarTH
             'id' => $this->getId(),
             'brand' => $this->getCarBrand()->getLabel(),
             'model' => $this->getModel(),
+            'usedPrice' => $this->getPriceUsed(),
             'carType' => $this->getCarType()->getLabel(),
             'fuel' => $this->getFuel()->getLabel(),
             'annualFuelCost' => $this->getAnnualFuelCost(),
@@ -513,6 +527,36 @@ class CarTH
     public function setCarBrand(?Brand $carBrand): self
     {
         $this->carBrand = $carBrand;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CarPrice>
+     */
+    public function getCarPrices(): Collection
+    {
+        return $this->carPrices;
+    }
+
+    public function addCarPrice(CarPrice $carPrice): self
+    {
+        if (!$this->carPrices->contains($carPrice)) {
+            $this->carPrices[] = $carPrice;
+            $carPrice->setRelation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCarPrice(CarPrice $carPrice): self
+    {
+        if ($this->carPrices->removeElement($carPrice)) {
+            // set the owning side to null (unless already changed)
+            if ($carPrice->getCar() === $this) {
+                $carPrice->setRelation(null);
+            }
+        }
 
         return $this;
     }
