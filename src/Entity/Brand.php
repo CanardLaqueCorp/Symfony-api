@@ -25,7 +25,7 @@ class Brand
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity=CarTh::class, mappedBy="carBrand")
+     * @ORM\OneToMany(targetEntity=CarTH::class, mappedBy="carBrand")
      */
     private $carThs;
 
@@ -52,7 +52,7 @@ class Brand
     }
 
     /**
-     * @return Collection<int, CarTh>
+     * @return Collection<int, CarTH>
      */
     public function getCarThs(): Collection
     {
