@@ -1,0 +1,3 @@
+index:
+path: /public/index
+controller: App\Controller\StatController::getStats
