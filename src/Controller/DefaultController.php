@@ -18,7 +18,9 @@ class DefaultController extends AbstractController
 
         $data = [];
         foreach ($routes as $route) {
-            $data[$route->getPath()] = $route->getMethods();
+            if($route->getPath() != '/') {
+                $data[$route->getPath()] = $route->getMethods();
+            }
         }
 
         return new JsonResponse($data);
