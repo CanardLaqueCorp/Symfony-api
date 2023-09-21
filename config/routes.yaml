@@ -1,3 +1,0 @@
-get_stats:
-  path: /get/stats
-  controller: App\Controller\StatController::getStats
