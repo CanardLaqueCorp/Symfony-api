@@ -12,11 +12,15 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index()
+    public function index() : JsonResponse
     {
-        return $this->json([
-            'message' => 'This is the default controller!',
-            'path' => 'src/Controller/DefaultController.php',
-        ]);
+        $routes = $this->get('router')->getRouteCollection();
+
+        $data = [];
+        foreach ($routes as $route) {
+            $data[$route->getPath()] = $route->getMethods();
+        }
+
+        return new JsonResponse($data);
     }
 }
