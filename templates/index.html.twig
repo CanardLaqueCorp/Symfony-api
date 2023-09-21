@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Routes
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+
+        .route-container {
+            /* background: linear-gradient(90deg, #eee 0%, #ccc 100%); */
+            margin-top: 40px;
+            padding: 16px 24px;
+        }
+
+        .path {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+        }
+
+        .path .copy {
+            margin-right: 24px;
+            background: linear-gradient(90deg, #4251f5 0%, #4079ff 100%);
+            color: #fff;
+            font-size: 18px;
+            padding: 6px 12px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: 0.25s ease;
+            cursor: pointer;
+        }
+
+        .path .copy:hover {
+            transform: scale(1.05);
+        }
+        
+        .path .copy:active {
+            transform: scale(1.1);
+            filter: hue-rotate(20deg);
+        }
+
+        .description {
+            background: #eee;
+            padding: 8px 16px;
+            border-radius: 8px;
+            margin-top: 24px;
+            margin-bottom: 8px;
+            font-size: 16px;
+            opacity: 0.5;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            width: auto;
+        }
+
+        .description span {
+            font-size: 20px;
+            margin-right: 8px;
+        }
+
+
+        .methods-container, .params-container {
+            margin-top: 16px;
+            display: flex;
+        }
+
+        .methods-container .methods {
+            display: flex;
+            margin-left: 8px;
+            align-items: center;
+        }
+
+        .method  {
+            background-color: #eee;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-right: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        .method.GET {
+            background-color: #14ba72;
+            color: #fff;
+        }
+
+        .method.POST {
+            background-color: #f5a742;
+            color: #fff;
+        }
+
+        .params {
+            display: flex;
+            margin-left: 8px;
+        }
+
+        .param {
+            margin-left: 8px;
+            margin-right: 8px;
+            background: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            color: #777;
+            text-align: center;
+        }
+
+        .param .label {
+            padding: 4px 16px;
+            font-weight: 600;
+            background: #bbb;
+            color: #fff;
+        }
+
+        .param .value {
+            padding: 4px 16px;
+        }
+
+
+    
+    </style>
+
+{% endblock %}
+
+{% block body %}
+    
+    {% for route in routes %}
+        <div class="route-container">
+            <div class="path"><div class="copy" onclick="copyToClip('{{ app.request.getSchemeAndHttpHost() ~ route.path }}')">Copy</div><div>{{ route.path }}</div></div>
+            <div class="description"><span>></span> {{ route.description }}</div>
+            <div class="methods-container">
+                <div class="label">Methods : </div>
+                <div class="methods">
+                    {% for method in route.methods %}
+                        <div class="method {{ method }}">{{ method }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if route.params|length > 0 %}
+                <div class="params-container">
+                    <div class="label">Params : </div>
+                    <div class="params">
+                        {% for param in route.params %}
+                            <div class="param" title="{% if param.required %}Required{% else %}Optional{% endif %}">
+                                <div class="label">{{ param.label }} {% if param.required %}<span>*</span>{% endif %}</div>
+                                <div class="value">{{ param.value }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        function copyToClip(text) {
+            var dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+        }
+    </script>
+
+{% endblock %}

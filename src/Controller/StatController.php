@@ -12,7 +12,7 @@ use App\Repository\CarTypeRepository;
 class StatController extends AbstractController
 {
     /**
-     * @Route("/get/stats/", name="get_stats", methods={"GET"})
+     * @Route("/get/stats", name="get_stats", methods={"GET"})
      */
     public function getStats(CarTHRepository $carRepo, BrandRepository $brandRepo, CarTypeRepository $carTypeRepo): JsonResponse
     {

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Poly API{% endblock %}</title>
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+        
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+
+            <style>
+
+            html {
+                font-family: 'Poppins', sans-serif;
+            }
+
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+
+            #container-main {
+                width: 100%;
+                max-width: 1280px;
+                margin: 0;
+                padding: 32px 40px;
+                box-sizing: border-box;
+                position: absolute;
+                top: 0px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            </style>
+
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+
+    </head>
+    <body>
+        <div id="container-main">
+            {% block body %}{% endblock %}
+        </div>
+    </body>
+</html>
