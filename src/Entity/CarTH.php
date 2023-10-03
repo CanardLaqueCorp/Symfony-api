@@ -154,6 +154,36 @@ class CarTH
      */
     private $carPrices;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $priceUsedEuro;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $annualFuelCostEuro;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $spendOnFiveYearEuro;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cityFuelMetric;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $highwayFuelMetric;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $combinedFuelMetric;
+
     public function __construct()
     {
         $this->carPrices = new ArrayCollection();
@@ -557,6 +587,78 @@ class CarTH
                 $carPrice->setRelation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPriceUsedEuro(): ?int
+    {
+        return $this->priceUsedEuro;
+    }
+
+    public function setPriceUsedEuro(?int $priceUsedEuro): self
+    {
+        $this->priceUsedEuro = $priceUsedEuro;
+
+        return $this;
+    }
+
+    public function getAnnualFuelCostEuro(): ?int
+    {
+        return $this->annualFuelCostEuro;
+    }
+
+    public function setAnnualFuelCostEuro(?int $annualFuelCostEuro): self
+    {
+        $this->annualFuelCostEuro = $annualFuelCostEuro;
+
+        return $this;
+    }
+
+    public function getSpendOnFiveYearEuro(): ?int
+    {
+        return $this->spendOnFiveYearEuro;
+    }
+
+    public function setSpendOnFiveYearEuro(?int $spendOnFiveYearEuro): self
+    {
+        $this->spendOnFiveYearEuro = $spendOnFiveYearEuro;
+
+        return $this;
+    }
+
+    public function getCityFuelMetric(): ?float
+    {
+        return $this->cityFuelMetric;
+    }
+
+    public function setCityFuelMetric(?float $cityFuelMetric): self
+    {
+        $this->cityFuelMetric = $cityFuelMetric;
+
+        return $this;
+    }
+
+    public function getHighwayFuelMetric(): ?float
+    {
+        return $this->highwayFuelMetric;
+    }
+
+    public function setHighwayFuelMetric(?float $highwayFuelMetric): self
+    {
+        $this->highwayFuelMetric = $highwayFuelMetric;
+
+        return $this;
+    }
+
+    public function getCombinedFuelMetric(): ?float
+    {
+        return $this->combinedFuelMetric;
+    }
+
+    public function setCombinedFuelMetric(?float $combinedFuelMetric): self
+    {
+        $this->combinedFuelMetric = $combinedFuelMetric;
 
         return $this;
     }

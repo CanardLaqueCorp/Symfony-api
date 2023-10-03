@@ -129,7 +129,7 @@
     
     {% for route in routes %}
         <div class="route-container">
-            <div class="path"><div class="copy" onclick="copyToClip('{{ app.request.getSchemeAndHttpHost() ~ route.path }}')">Copy</div><div>{{ route.path }}</div></div>
+            <div class="path"><div class="copy" onclick="copyToClip('{{ app.request.getSchemeAndHttpHost() ~ '/public' ~ route.path }}')">Copy</div><div>{{ route.path }}</div></div>
             <div class="description"><span>></span> {{ route.description }}</div>
             <div class="methods-container">
                 <div class="label">Methods : </div>
