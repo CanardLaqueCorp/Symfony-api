@@ -37,6 +37,11 @@ class CarPrice
      */
     private $year;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $priceEuro;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -97,5 +102,17 @@ class CarPrice
             'mileage' => $this->getMileage(),
             'year' => $this->getYear()
         ];
+    }
+
+    public function getPriceEuro(): ?int
+    {
+        return $this->priceEuro;
+    }
+
+    public function setPriceEuro(?int $priceEuro): self
+    {
+        $this->priceEuro = $priceEuro;
+
+        return $this;
     }
 }
