@@ -184,6 +184,21 @@ class CarTH
      */
     private $combinedFuelMetric;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $cityCarbonMetric;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $highwayCarbonMetric;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $combinedCarbonMetric;
+
     public function __construct()
     {
         $this->carPrices = new ArrayCollection();
@@ -659,6 +674,42 @@ class CarTH
     public function setCombinedFuelMetric(?float $combinedFuelMetric): self
     {
         $this->combinedFuelMetric = $combinedFuelMetric;
+
+        return $this;
+    }
+
+    public function getCityCarbonMetric(): ?int
+    {
+        return $this->cityCarbonMetric;
+    }
+
+    public function setCityCarbonMetric(?int $cityCarbonMetric): self
+    {
+        $this->cityCarbonMetric = $cityCarbonMetric;
+
+        return $this;
+    }
+
+    public function getHighwayCarbonMetric(): ?int
+    {
+        return $this->highwayCarbonMetric;
+    }
+
+    public function setHighwayCarbonMetric(?int $highwayCarbonMetric): self
+    {
+        $this->highwayCarbonMetric = $highwayCarbonMetric;
+
+        return $this;
+    }
+
+    public function getCombinedCarbonMetric(): ?int
+    {
+        return $this->combinedCarbonMetric;
+    }
+
+    public function setCombinedCarbonMetric(?int $combinedCarbonMetric): self
+    {
+        $this->combinedCarbonMetric = $combinedCarbonMetric;
 
         return $this;
     }
