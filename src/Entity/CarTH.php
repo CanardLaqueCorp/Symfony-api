@@ -167,7 +167,7 @@ class CarTH
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $spendOnFiveYearEuro;
+    private $spendOnFiveYearsEuro;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -630,14 +630,14 @@ class CarTH
         return $this;
     }
 
-    public function getSpendOnFiveYearEuro(): ?int
+    public function getSpendOnFiveYearsEuro(): ?int
     {
-        return $this->spendOnFiveYearEuro;
+        return $this->spendOnFiveYearsEuro;
     }
 
-    public function setSpendOnFiveYearEuro(?int $spendOnFiveYearEuro): self
+    public function setspendOnFiveYearsEuro(?int $spendOnFiveYearsEuro): self
     {
-        $this->spendOnFiveYearEuro = $spendOnFiveYearEuro;
+        $this->spendOnFiveYearsEuro = $spendOnFiveYearsEuro;
 
         return $this;
     }
