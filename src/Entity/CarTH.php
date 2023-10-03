@@ -497,61 +497,6 @@ class CarTH
         return $this;
     }
 
-    public function getDataAll() {
-        return array(
-            'id' => $this->getId(),
-            'brandId' => $this->getCarBrand()->getId(),
-            'brand' => $this->getCarBrand()->getLabel(),
-            'model' => $this->getModel(),
-            'usedPrice' => $this->getPriceUsed(),
-            'carTypeId' => $this->getCarType()->getId(),
-            'carType' => $this->getCarType()->getLabel(),
-            'priceNew' => $this->getPriceNew(),
-            'priceUsed' => $this->getPriceUsed(),
-            'cylinder' => $this->getCylinder(),
-            'transmissionTypeId' => $this->getTransmissionType()->getId(),
-            'transmissionTypeCode' => $this->getTransmissionType()->getCode(),
-            'transmissionType' => $this->getTransmissionType()->getLabel(),
-            'transmission' => $this->getTransmission(),
-            'gears' => $this->getGears(),
-            'driveSystemId' => $this->getDriveSystem()->getId(),
-            'driveSystemCode' => $this->getDriveSystem()->getCode(),
-            'driveSystem' => $this->getDriveSystem()->getLabel(),
-            'fuelId' => $this->getFuel()->getId(),
-            'fuelCode' => $this->getFuel()->getCode(),
-            'fuel' => $this->getFuel()->getLabel(),
-            'fuelDetail' => $this->getFuel()->getDetail(),
-            'maxBioFuel' => $this->getMaxBioFuel(),
-            'hasStartAndStop' => $this->hasStartAndStop(),
-            'cityFuel' => $this->getCityFuel(),
-            'cityCarbon' => $this->getCityCarbon(),
-            'highwayFuel' => $this->getHighwayFuel(),
-            'highwayCarbon' => $this->getHighwayCarbon(),
-            'combinedFuel' => $this->getCombinedFuel(),
-            'combinedCarbon' => $this->getCombinedCarbon(),
-            'hasGuzzler' => $this->hasGuzzler(),
-            'annualFuelCost' => $this->getAnnualFuelCost(),
-            'spendOnFiveYears' => $this->getSpendOnFiveYears(),
-            'feRating' => $this->getFeRating(),
-            'ghgRating' => $this->getGhgRating(),
-            'smogRating' => $this->getSmogRating(),
-            'ecoScore' => $this->getEcoScore()
-        );
-    }
-
-    public function getDataLight() {
-        return array(
-            'id' => $this->getId(),
-            'brand' => $this->getCarBrand()->getLabel(),
-            'model' => $this->getModel(),
-            'usedPrice' => $this->getPriceUsed(),
-            'carType' => $this->getCarType()->getLabel(),
-            'fuel' => $this->getFuel()->getLabel(),
-            'annualFuelCost' => $this->getAnnualFuelCost(),
-            'ecoScore' => $this->getEcoScore()
-        );
-    }
-
     public function getEcoScore(): ?int
     {
         return $this->ecoScore;
@@ -712,5 +657,70 @@ class CarTH
         $this->combinedCarbonMetric = $combinedCarbonMetric;
 
         return $this;
+    }
+    
+    public function getDataAll() {
+        return array(
+            'id' => $this->getId(),
+            'brandId' => $this->getCarBrand()->getId(),
+            'brand' => $this->getCarBrand()->getLabel(),
+            'model' => $this->getModel(),
+            'carTypeId' => $this->getCarType()->getId(),
+            'carType' => $this->getCarType()->getLabel(),
+            'priceNew' => $this->getPriceNew(),
+            'priceUsed' => $this->getPriceUsed(),
+            'priceUsedEuro' => $this->getPriceUsedEuro(),
+            'cylinder' => $this->getCylinder(),
+            'transmissionTypeId' => $this->getTransmissionType()->getId(),
+            'transmissionTypeCode' => $this->getTransmissionType()->getCode(),
+            'transmissionType' => $this->getTransmissionType()->getLabel(),
+            'transmission' => $this->getTransmission(),
+            'gears' => $this->getGears(),
+            'driveSystemId' => $this->getDriveSystem()->getId(),
+            'driveSystemCode' => $this->getDriveSystem()->getCode(),
+            'driveSystem' => $this->getDriveSystem()->getLabel(),
+            'fuelId' => $this->getFuel()->getId(),
+            'fuelCode' => $this->getFuel()->getCode(),
+            'fuel' => $this->getFuel()->getLabel(),
+            'fuelDetail' => $this->getFuel()->getDetail(),
+            'maxBioFuel' => $this->getMaxBioFuel(),
+            'hasStartAndStop' => $this->hasStartAndStop(),
+            'cityFuel' => $this->getCityFuel(),
+            'cityFuelMetric' => $this->getCityFuelMetric(),
+            'cityCarbon' => $this->getCityCarbon(),
+            'cityCarbonMetric' => $this->getCityCarbonMetric(),
+            'highwayFuel' => $this->getHighwayFuel(),
+            'highwayFuelMetric' => $this->getHighwayFuelMetric(),
+            'highwayCarbon' => $this->getHighwayCarbon(),
+            'highwayCarbonMetric' => $this->getHighwayCarbonMetric(),
+            'combinedFuel' => $this->getCombinedFuel(),
+            'combinedFuelMetric' => $this->getCombinedFuelMetric(),
+            'combinedCarbon' => $this->getCombinedCarbon(),
+            'combinedCarbonMetric' => $this->getCombinedCarbonMetric(),
+            'hasGuzzler' => $this->hasGuzzler(),
+            'annualFuelCost' => $this->getAnnualFuelCost(),
+            'annualFuelCostEuro' => $this->getAnnualFuelCostEuro(),
+            'spendOnFiveYears' => $this->getSpendOnFiveYears(),
+            'spendOnFiveYearsEuro' => $this->getSpendOnFiveYearsEuro(),
+            'feRating' => $this->getFeRating(),
+            'ghgRating' => $this->getGhgRating(),
+            'smogRating' => $this->getSmogRating(),
+            'ecoScore' => $this->getEcoScore()
+        );
+    }
+
+    public function getDataLight() {
+        return array(
+            'id' => $this->getId(),
+            'brand' => $this->getCarBrand()->getLabel(),
+            'model' => $this->getModel(),
+            'usedPrice' => $this->getPriceUsed(),
+            'usedPriceEuro' => $this->getPriceUsedEuro(),
+            'carType' => $this->getCarType()->getLabel(),
+            'fuel' => $this->getFuel()->getLabel(),
+            'annualFuelCost' => $this->getAnnualFuelCost(),
+            'annualFuelCostEuro' => $this->getAnnualFuelCostEuro(),
+            'ecoScore' => $this->getEcoScore()
+        );
     }
 }
