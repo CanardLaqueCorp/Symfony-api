@@ -35,6 +35,115 @@ class StatController extends AbstractController
             ]
         ]);
     }
+    /**
+     * @Route("/get/data/max", name="get_data_max", methods={"GET"})
+     */
+    public function getDataMax(CarTHRepository $carRepo ): JsonResponse
+    {
+        $cars= $carRepo->findAll();
+
+        $minBiofuel = $cars[0]->getBiofuel();
+        $maxCityFuel = $cars[0]->getCityFuel();
+        $maxCityFuelMetric = $cars[0]->getCityFuelMetric();
+        $maxHighwayFuel = $cars[0]->getHighwayFuel();
+        $maxHighwayFuelMetric = $cars[0]->getHighwayFuelMetric();
+        $maxCombinedFuel = $cars[0]->getCombinedFuel();
+        $maxCombinedFuelMetric = $cars[0]->getCombinedFuelMetric();
+        $minEcoScore = $cars[0]->getEcoScore();
+        $maxAnnualFuelCost = $cars[0]->getAnnualFuelCost();
+        $maxAnnualFuelCostEuro = $cars[0]->getAnnualFuelCostEuro();
+        $minFeRating = $cars[0]->getFeRating();
+        $minGhgRating = $cars[0]->getGhgRating();
+        $minSmogRating = $cars[0]->getSmogRating();
+        $maxCityCarbon = $cars[0]->getCityCarbon();
+        $maxCityCarbonMetric = $cars[0]->getCityCarbonMetric();
+        $maxHighwayCarbon = $cars[0]->getHighwayCarbon();
+        $maxHighwayCarbonMetric = $cars[0]->getHighwayCarbonMetric();
+        $maxCombinedCarbon = $cars[0]->getCombinedCarbon();
+        $maxCombinedCarbonMetric = $cars[0]->getCombinedCarbonMetric();
+
+        foreach ($cars as $car){
+            if ($car->getBiofuel() < $minBiofuel){
+                $minBiofuel = $car->getBiofuel();
+            }
+
+            if ($car->getCityFuel() > $maxCityFuel){
+                $maxCityFuel = $car->getCityFuel();
+                $maxCityFuelMetric = $car->getCityFuelMetric();
+            }
+
+            if ($car->getHighwayFuel() > $maxHighwayFuel){
+                $maxHighwayFuel = $car->getHighwayFuel();
+                $maxHighwayFuelMetric = $car->getHighwayFuelMetric();
+            }
+
+            if ($car->getCombinedFuel() > $maxCombinedFuel){
+                $maxCombinedFuel = $car->getCombinedFuel();
+                $maxCombinedFuelMetric = $car->getCombinedFuelMetric();
+            }
+
+            if ($car->getEcoScore() < $minEcoScore){
+                $minEcoScore = $car->getEcoScore();
+            }
+
+            if ($car->getAnnualFuelCost() > $maxAnnualFuelCost){
+                $maxAnnualFuelCost = $car->getAnnualFuelCost();
+                $maxAnnualFuelCostEuro = $car->getAnnualFuelCostEuro();
+            }
+
+            if ($car->getFeRating() < $minFeRating){
+                $minFeRating = $car->getFeRating();
+            }
+
+            if ($car->getGhgRating() < $minGhgRating){
+                $minGhgRating = $car->getGhgRating();
+            }
+
+            if ($car->getSmogRating() < $minSmogRating){
+                $minSmogRating = $car->getSmogRating();
+            }
+
+            if ($car->getCityCarbon() > $maxCityCarbon){
+                $maxCityCarbon = $car->getCityCarbon();
+                $maxCityCarbonMetric = $car->getCityCarbonMetric();
+            }
+
+            if ($car->getHighwayCarbon() > $maxHighwayCarbon){
+                $maxHighwayCarbon = $car->getHighwayCarbon();
+                $maxHighwayCarbonMetric = $car->getHighwayCarbonMetric();
+            }
+
+            if ($car->getCombinedCarbon() > $maxCombinedCarbon){
+                $maxCombinedCarbon = $car->getCombinedCarbon();
+                $maxCombinedCarbonMetric = $car->getCombinedCarbonMetric();
+            }
+        }
+
+        return new JsonResponse([
+            'response' => 'ok',
+            'result' => [
+                'minBiofuel' => $minBiofuel,
+                'maxCityFuel' => $maxCityFuel,
+                'maxCityFuelMetric' => $maxCityFuelMetric,
+                'maxHighwayFuel' => $maxHighwayFuel,
+                'maxHighwayFuelMetric' => $maxHighwayFuelMetric,
+                'maxCombinedFuel' => $maxCombinedFuel,
+                'maxCombinedFuelMetric' => $maxCombinedFuelMetric,
+                'minEcoScore' => $minEcoScore,
+                'maxAnnualFuelCost' => $maxAnnualFuelCost,
+                'maxAnnualFuelCostEuro' => $maxAnnualFuelCostEuro,
+                'minFeRating' => $minFeRating,
+                'minGhgRating' => $minGhgRating,
+                'minSmogRating' => $minSmogRating,
+                'maxCityCarbon' => $maxCityCarbon,
+                'maxCityCarbonMetric' => $maxCityCarbonMetric,
+                'maxHighwayCarbon' => $maxHighwayCarbon,
+                'maxHighwayCarbonMetric' => $maxHighwayCarbonMetric,
+                'maxCombinedCarbon' => $maxCombinedCarbon,
+                'maxCombinedCarbonMetric' => $maxCombinedCarbonMetric
+            ]
+        ]);
+    }
 }
 
 
