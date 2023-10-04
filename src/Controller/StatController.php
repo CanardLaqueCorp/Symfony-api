@@ -43,11 +43,11 @@ class StatController extends AbstractController
         $cars= $carRepo->findAll();
 
         $minBiofuel = $cars[0]->getMaxBioFuel();
-        $maxCityFuel = $cars[0]->getCityFuel();
+        $minCityFuel = $cars[0]->getCityFuel();
         $maxCityFuelMetric = $cars[0]->getCityFuelMetric();
-        $maxHighwayFuel = $cars[0]->getHighwayFuel();
+        $minHighwayFuel = $cars[0]->getHighwayFuel();
         $maxHighwayFuelMetric = $cars[0]->getHighwayFuelMetric();
-        $maxCombinedFuel = $cars[0]->getCombinedFuel();
+        $minCombinedFuel = $cars[0]->getCombinedFuel();
         $maxCombinedFuelMetric = $cars[0]->getCombinedFuelMetric();
         $minEcoScore = $cars[0]->getEcoScore();
         $maxAnnualFuelCost = $cars[0]->getAnnualFuelCost();
@@ -67,18 +67,18 @@ class StatController extends AbstractController
                 $minBiofuel = $car->getMaxBioFuel();
             }
 
-            if ($car->getCityFuel() > $maxCityFuel){
-                $maxCityFuel = $car->getCityFuel();
+            if ($car->getCityFuel() < $minCityFuel){
+                $minCityFuel = $car->getCityFuel();
                 $maxCityFuelMetric = $car->getCityFuelMetric();
             }
 
-            if ($car->getHighwayFuel() > $maxHighwayFuel){
-                $maxHighwayFuel = $car->getHighwayFuel();
+            if ($car->getHighwayFuel() < $minHighwayFuel){
+                $minHighwayFuel = $car->getHighwayFuel();
                 $maxHighwayFuelMetric = $car->getHighwayFuelMetric();
             }
 
-            if ($car->getCombinedFuel() > $maxCombinedFuel){
-                $maxCombinedFuel = $car->getCombinedFuel();
+            if ($car->getCombinedFuel() < $minCombinedFuel){
+                $minCombinedFuel = $car->getCombinedFuel();
                 $maxCombinedFuelMetric = $car->getCombinedFuelMetric();
             }
 
