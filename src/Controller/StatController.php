@@ -42,7 +42,7 @@ class StatController extends AbstractController
     {
         $cars= $carRepo->findAll();
 
-        $minBiofuel = $cars[0]->getBiofuel();
+        $minBiofuel = $cars[0]->getMaxBioFuel();
         $maxCityFuel = $cars[0]->getCityFuel();
         $maxCityFuelMetric = $cars[0]->getCityFuelMetric();
         $maxHighwayFuel = $cars[0]->getHighwayFuel();
