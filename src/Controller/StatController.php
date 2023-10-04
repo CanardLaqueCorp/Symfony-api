@@ -63,8 +63,8 @@ class StatController extends AbstractController
         $maxCombinedCarbonMetric = $cars[0]->getCombinedCarbonMetric();
 
         foreach ($cars as $car){
-            if ($car->getBiofuel() < $minBiofuel){
-                $minBiofuel = $car->getBiofuel();
+            if ($car->getMaxBiofuel() < $minBiofuel){
+                $minBiofuel = $car->getMaxBiofuel();
             }
 
             if ($car->getCityFuel() > $maxCityFuel){
