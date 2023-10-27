@@ -28,9 +28,7 @@ class BrandController extends AbstractController
                 ]);
             }
             else {
-                return $this->json([
-                    'response' => 'notFound'
-                ]);
+                return new JsonResponse(['response' => 'Not found'], 404);
             }            
         }
         else {
@@ -38,17 +36,15 @@ class BrandController extends AbstractController
             $brand = $brandRepo->find($id);
             
             if($brand == null) {
-                return $this->json([
-                    'response' => 'notFound'
-                ]);
+                return new JsonResponse(['response' => 'Not found'], 404);
             }
 
             $data = $brand->getDataAll();
             
-            return $this->json([
+            return new JsonResponse([
                 'response' => 'ok',
                 'result' => $data
-            ]);
+            ], 200);
         }
 
     }

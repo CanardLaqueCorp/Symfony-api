@@ -22,15 +22,13 @@ class CarTypeController extends AbstractController
                 foreach ($carTypes as $carType) {
                     $carTypesRes[] = $carType->getDataAll();
                 }
-                return $this->json([
+                return new JsonResponse([
                     'response' => 'ok',
                     'result' => $carTypesRes
-                ]);
+                ], 200);
             }
             else {
-                return $this->json([
-                    'response' => 'notFound'
-                ]);
+                return new JsonResponse(['response' => 'Not found'], 404);
             }            
         }
         else {
@@ -38,17 +36,15 @@ class CarTypeController extends AbstractController
             $carType = $carTypeRepo->find($id);
             
             if($carType == null) {
-                return $this->json([
-                    'response' => 'notFound'
-                ]);
+                return new JsonResponse(['response' => 'Not found'], 404);
             }
 
             $data = $carType->getDataAll();
             
-            return $this->json([
+            return new JsonResponse([
                 'response' => 'ok',
                 'result' => $data
-            ]);
+            ], 200);
         }
 
     }

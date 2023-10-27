@@ -16,6 +16,8 @@ class CarTHController extends AbstractController
      */
     public function getById(CarTHRepository $carRepo, $id = "all", $data = "all"): JsonResponse
     {
+        $statsGlobal = $carRepo->getStatsGlobal();
+
         if ($id == "all") {
             $cars = $carRepo->findBy([], ['ecoScore' => 'DESC']);
 
@@ -25,18 +27,17 @@ class CarTHController extends AbstractController
                     if($data == 'light') {
                         $carsRes[] = $car->getDataLight();
                     } else {
-                        $carsRes[] = $car->getDataAll();
+                        $carsRes[] = $car->getDataAll($statsGlobal);
                     }
                 }
-                return $this->json([
+
+                return new JsonResponse([
                     'response' => 'ok',
                     'result' => $carsRes
-                ]);
+                ], 200);
             }
             else {
-                return $this->json([
-                    'response' => 'notFound'
-                ]);
+                return new JsonResponse(['response' => 'Not found'], 404);
             }            
         }
         else {
@@ -44,21 +45,19 @@ class CarTHController extends AbstractController
             $car = $carRepo->find($id);
             
             if($car == null) {
-                return $this->json([
-                    'response' => 'notFound'
-                ]);
+                return new JsonResponse(['response' => 'Not found'], 404);
             }
 
             if($data == 'light') {
                 $data = $car->getDataLight();
             } else {
-                $data = $car->getDataAll();
+                $data = $car->getDataAll($statsGlobal);
             }
             
-            return $this->json([
+            return new JsonResponse([
                 'response' => 'ok',
                 'result' => $data
-            ]);
+            ], 200);
         }
     }
 
@@ -68,19 +67,18 @@ class CarTHController extends AbstractController
     public function getPricesById(CarTHRepository $carRepo, $id = null) {
         if ($id == null)
         {
-            return $this->json([
-                'response' => 'notFound'
-            ]);
-        } else {
+            return new JsonResponse(['response' => 'Not found'], 404);
+        }
+        else {
             $prices = $carRepo->find($id)->getCarPrices();
             $res = array();
             foreach ($prices as $price) {
                 $res[] = $price->getDataAll();
             }
-            return $this->json([
+            return new JsonResponse([
                 'response' => 'ok',
                 'result' => $res
-            ]);
+            ], 200);
         }
     }
 }

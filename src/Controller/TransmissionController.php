@@ -22,15 +22,13 @@ class TransmissionController extends AbstractController
                 foreach ($transmissions as $transmission) {
                     $transmissionsRes[] = $transmission->getDataAll();
                 }
-                return $this->json([
+                return new JsonResponse([
                     'response' => 'ok',
                     'result' => $transmissionsRes
-                ]);
+                ], 200);
             }
             else {
-                return $this->json([
-                    'response' => 'notFound'
-                ]);
+                return new JsonResponse(['response' => 'Not found'], 404);
             }            
         }
         else {
@@ -38,17 +36,15 @@ class TransmissionController extends AbstractController
             $transmission = $transmissionRepo->find($id);
             
             if($transmission == null) {
-                return $this->json([
-                    'response' => 'notFound'
-                ]);
+                return new JsonResponse(['response' => 'Not found'], 404);
             }
 
             $data = $transmission->getDataAll();
             
-            return $this->json([
+            return new JsonResponse([
                 'response' => 'ok',
                 'result' => $data
-            ]);
+            ], 200);
         }
 
     }

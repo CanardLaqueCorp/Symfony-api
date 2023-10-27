@@ -658,8 +658,12 @@ class CarTH
 
         return $this;
     }
+
+    private function calculateGrade($value, $min, $max) {
+        return 1 + floor((($value - $min) / ($max - $min)) * 4);
+    }
     
-    public function getDataAll() {
+    public function getDataAll($stats) {
         return array(
             'id' => $this->getId(),
             'brandId' => $this->getCarBrand()->getId(),
@@ -686,7 +690,10 @@ class CarTH
             'maxBioFuel' => $this->getMaxBioFuel(),
             'hasStartAndStop' => $this->hasStartAndStop(),
             'cityFuel' => $this->getCityFuel(),
+            
             'cityFuelMetric' => $this->getCityFuelMetric(),
+            'cityFuelMetricGrade' => $this->calculateGrade($this->getCityFuelMetric(), $stats["minCityFuelMetric"], $stats["maxCityFuelMetric"]),
+            
             'cityCarbon' => $this->getCityCarbon(),
             'cityCarbonMetric' => $this->getCityCarbonMetric(),
             'highwayFuel' => $this->getHighwayFuel(),

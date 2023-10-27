@@ -21,9 +21,7 @@ class StatController extends AbstractController
         $types = $carTypeRepo->findAll();
 
         if ($cars == null || $brands == null || $types == null) {
-            return $this->json([
-                'response' => 'notFound'
-            ]);
+            return new JsonResponse(['response' => 'Not found'], 404);
         }       
 
         return new JsonResponse([
@@ -33,7 +31,7 @@ class StatController extends AbstractController
                 'brands' => count($brands),
                 'types' => count($types)
             ]
-        ]);
+        ], 200);
     }
     /**
      * @Route("/get/data/max", name="get_data_max", methods={"GET"})
@@ -142,8 +140,6 @@ class StatController extends AbstractController
                 'maxCombinedCarbon' => $maxCombinedCarbon,
                 'maxCombinedCarbonMetric' => $maxCombinedCarbonMetric
             ]
-        ]);
+        ], 200);
     }
 }
-
-

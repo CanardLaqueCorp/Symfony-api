@@ -22,15 +22,13 @@ class FuelController extends AbstractController
                 foreach ($fuels as $fuel) {
                     $fuelsRes[] = $fuel->getDataAll();
                 }
-                return $this->json([
+                return new JsonResponse([
                     'response' => 'ok',
                     'result' => $fuelsRes
-                ]);
+                ], 200);
             }
             else {
-                return $this->json([
-                    'response' => 'notFound'
-                ]);
+                return new JsonResponse(['response' => 'Not found'], 404);
             }            
         }
         else {
@@ -38,17 +36,15 @@ class FuelController extends AbstractController
             $fuel = $fuelRepo->find($id);
             
             if($fuel == null) {
-                return $this->json([
-                    'response' => 'notFound'
-                ]);
+                return new JsonResponse(['response' => 'Not found'], 404);
             }
 
             $data = $fuel->getDataAll();
             
-            return $this->json([
+            return new JsonResponse([
                 'response' => 'ok',
                 'result' => $data
-            ]);
+            ], 200);
         }
 
     }

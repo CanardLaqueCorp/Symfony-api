@@ -22,15 +22,13 @@ class DriveSystemController extends AbstractController
                 foreach ($driveSystems as $driveSystem) {
                     $driveSystemsRes[] = $driveSystem->getDataAll();
                 }
-                return $this->json([
+                return new JsonResponse([
                     'response' => 'ok',
                     'result' => $driveSystemsRes
-                ]);
+                ], 200);
             }
             else {
-                return $this->json([
-                    'response' => 'notFound'
-                ]);
+                return new JsonResponse(['response' => 'Not found'], 404);
             }            
         }
         else {
@@ -38,17 +36,15 @@ class DriveSystemController extends AbstractController
             $driveSystem = $driveSystemRepo->find($id);
             
             if($driveSystem == null) {
-                return $this->json([
-                    'response' => 'notFound'
-                ]);
+                return new JsonResponse(['response' => 'Not found'], 404);
             }
 
             $data = $driveSystem->getDataAll();
             
-            return $this->json([
+            return new JsonResponse([
                 'response' => 'ok',
                 'result' => $data
-            ]);
+            ], 200);
         }
 
     }

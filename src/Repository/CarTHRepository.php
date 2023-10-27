@@ -20,4 +20,25 @@ class CarTHRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, CarTH::class);
     }
+
+    public function getStatsGlobal(): array
+    {
+        $cars = $this->findAll();
+
+        $statsGlobal = array(
+            "maxCityFuelMetric" => $cars[0]->getCityFuelMetric(),
+            "minCityFuelMetric" => $cars[0]->getCityFuelMetric(),
+        );
+
+        foreach($cars as $car) {
+            if ($car->getCityFuelMetric() > $statsGlobal["maxCityFuelMetric"]) {
+                $statsGlobal["maxCityFuelMetric"] = $car->getCityFuelMetric();
+            }
+            if ($car->getCityFuelMetric() < $statsGlobal["minCityFuelMetric"]) {
+                $statsGlobal["minCityFuelMetric"] = $car->getCityFuelMetric();
+            }
+        }
+
+        return $statsGlobal;
+    }
 }
