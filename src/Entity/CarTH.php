@@ -660,7 +660,19 @@ class CarTH
     }
 
     private function calculateGrade($value, $min, $max) {
-        return 1 + floor((($value - $min) / ($max - $min)) * 4);
+        $step = ($max - $min) / 5;
+        if ($value >= $min + 4 * $step) {
+            $grade = 5;
+        } else if ($value >= $min + 3 * $step) {
+            $grade = 4;
+        } else if ($value >= $min + 2 * $step) {
+            $grade = 3;
+        } else if ($value >= $min + $step) {
+            $grade = 2;
+        } else {
+            $grade = 1;
+        }
+        return $grade;
     }
     
     public function getDataAll($stats) {
