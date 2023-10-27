@@ -26,16 +26,16 @@ class CarTHRepository extends ServiceEntityRepository
         $cars = $this->findAll();
 
         $statsGlobal = array(
-            "maxCityFuelMetric" => $cars[0]->getCityFuelMetric(),
-            "minCityFuelMetric" => $cars[0]->getCityFuelMetric(),
+            "maxCombinedFuel" => $cars[0]->getCombinedFuel(),
+            "minCombinedFuel" => $cars[0]->getCombinedFuel(),
         );
 
         foreach($cars as $car) {
-            if ($car->getCityFuelMetric() > $statsGlobal["maxCityFuelMetric"]) {
-                $statsGlobal["maxCityFuelMetric"] = $car->getCityFuelMetric();
+            if ($car->getCombinedFuel() > $statsGlobal["maxCombinedFuel"]) {
+                $statsGlobal["maxCombinedFuel"] = $car->getCombinedFuel();
             }
-            if ($car->getCityFuelMetric() < $statsGlobal["minCityFuelMetric"]) {
-                $statsGlobal["minCityFuelMetric"] = $car->getCityFuelMetric();
+            if ($car->getCombinedFuel() < $statsGlobal["minCombinedFuel"]) {
+                $statsGlobal["minCombinedFuel"] = $car->getCombinedFuel();
             }
         }
 

@@ -690,18 +690,18 @@ class CarTH
             'maxBioFuel' => $this->getMaxBioFuel(),
             'hasStartAndStop' => $this->hasStartAndStop(),
             'cityFuel' => $this->getCityFuel(),
-            
-            'cityFuelMetric' => $this->getCityFuelMetric(),
-            'cityFuelMetricGrade' => $this->calculateGrade($this->getCityFuelMetric(), $stats["minCityFuelMetric"], $stats["maxCityFuelMetric"]),
-            
+            'cityFuelMetric' => $this->getCityFuelMetric(),            
             'cityCarbon' => $this->getCityCarbon(),
             'cityCarbonMetric' => $this->getCityCarbonMetric(),
             'highwayFuel' => $this->getHighwayFuel(),
             'highwayFuelMetric' => $this->getHighwayFuelMetric(),
             'highwayCarbon' => $this->getHighwayCarbon(),
             'highwayCarbonMetric' => $this->getHighwayCarbonMetric(),
+            
             'combinedFuel' => $this->getCombinedFuel(),
             'combinedFuelMetric' => $this->getCombinedFuelMetric(),
+            'combinedFuelGrade' => $this->calculateGrade($this->getCombinedFuel(), $stats["minCombinedFuel"], $stats["maxCombinedFuel"]),
+
             'combinedCarbon' => $this->getCombinedCarbon(),
             'combinedCarbonMetric' => $this->getCombinedCarbonMetric(),
             'hasGuzzler' => $this->hasGuzzler(),
