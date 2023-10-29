@@ -674,6 +674,10 @@ class CarTH
         }
         return $grade;
     }
+
+    private function calculateGradeReverse($value, $min, $max) {
+       return 6 - $this->calculateGrade($value, $min, $max);
+    }
     
     public function getDataAll($stats) {
         return array(
@@ -684,8 +688,11 @@ class CarTH
             'carTypeId' => $this->getCarType()->getId(),
             'carType' => $this->getCarType()->getLabel(),
             'priceNew' => $this->getPriceNew(),
+            
             'priceUsed' => $this->getPriceUsed(),
             'priceUsedEuro' => $this->getPriceUsedEuro(),
+            // priceUsedGarde
+
             'cylinder' => $this->getCylinder(),
             'transmissionTypeId' => $this->getTransmissionType()->getId(),
             'transmissionTypeCode' => $this->getTransmissionType()->getCode(),
@@ -701,14 +708,22 @@ class CarTH
             'fuelDetail' => $this->getFuel()->getDetail(),
             'maxBioFuel' => $this->getMaxBioFuel(),
             'hasStartAndStop' => $this->hasStartAndStop(),
+            
             'cityFuel' => $this->getCityFuel(),
-            'cityFuelMetric' => $this->getCityFuelMetric(),            
+            'cityFuelMetric' => $this->getCityFuelMetric(),   
+            // cityFuelGrade
+            
             'cityCarbon' => $this->getCityCarbon(),
             'cityCarbonMetric' => $this->getCityCarbonMetric(),
+            // cityCarbonGrade
+
             'highwayFuel' => $this->getHighwayFuel(),
             'highwayFuelMetric' => $this->getHighwayFuelMetric(),
+            // highwayFuelGrade
+
             'highwayCarbon' => $this->getHighwayCarbon(),
             'highwayCarbonMetric' => $this->getHighwayCarbonMetric(),
+            // highwayCarbonGrade
             
             'combinedFuel' => $this->getCombinedFuel(),
             'combinedFuelMetric' => $this->getCombinedFuelMetric(),
@@ -716,14 +731,27 @@ class CarTH
 
             'combinedCarbon' => $this->getCombinedCarbon(),
             'combinedCarbonMetric' => $this->getCombinedCarbonMetric(),
+            // combinedCarbonGrade
+
             'hasGuzzler' => $this->hasGuzzler(),
+
             'annualFuelCost' => $this->getAnnualFuelCost(),
             'annualFuelCostEuro' => $this->getAnnualFuelCostEuro(),
+            // annualFuelCostGrade
+
             'spendOnFiveYears' => $this->getSpendOnFiveYears(),
             'spendOnFiveYearsEuro' => $this->getSpendOnFiveYearsEuro(),
+            // spendOnFiveYearsGrade
+
             'feRating' => $this->getFeRating(),
+            // feRatingGrade
+
             'ghgRating' => $this->getGhgRating(),
+            // ghgRatingGrade
+
             'smogRating' => $this->getSmogRating(),
+            // smogRatingGrade
+
             'ecoScore' => $this->getEcoScore()
         );
     }

@@ -28,6 +28,9 @@ class CarTHRepository extends ServiceEntityRepository
         $statsGlobal = array(
             "maxCombinedFuel" => $cars[0]->getCombinedFuel(),
             "minCombinedFuel" => $cars[0]->getCombinedFuel(),
+
+            // add others min/max here
+
         );
 
         foreach($cars as $car) {
@@ -37,6 +40,9 @@ class CarTHRepository extends ServiceEntityRepository
             if ($car->getCombinedFuel() < $statsGlobal["minCombinedFuel"]) {
                 $statsGlobal["minCombinedFuel"] = $car->getCombinedFuel();
             }
+
+            // add others min/max comparaison here
+            
         }
 
         return $statsGlobal;
