@@ -659,15 +659,19 @@ class CarTH
         return $this;
     }
 
+    private function adjust($value, $min, $max) {
+        return intval(100 * ($value - $min) / ($max - $min));
+    }
+
     private function calculateGrade($value, $min, $max) {
-        $step = ($max - $min) / 5;
-        if ($value >= $min + 4 * $step) {
+        $value = $this->adjust($value, $min, $max);
+        if ($value >= 80) {
             $grade = 5;
-        } else if ($value >= $min + 3 * $step) {
+        } else if ($value >= 60) {
             $grade = 4;
-        } else if ($value >= $min + 2 * $step) {
+        } else if ($value >= 40) {
             $grade = 3;
-        } else if ($value >= $min + $step) {
+        } else if ($value >= 20) {
             $grade = 2;
         } else {
             $grade = 1;
@@ -752,11 +756,12 @@ class CarTH
             'smogRating' => $this->getSmogRating(),
             // smogRatingGrade
 
-            'ecoScore' => $this->getEcoScore()
+            'ecoScore' => $this->adjust($this->getEcoScore(), $stats["minEcoscore"], $stats["maxEcoscore"]),
+            'ecoScoreNonAdjusted' => $this->getEcoScore()
         );
     }
 
-    public function getDataLight() {
+    public function getDataLight($stats) {
         return array(
             'id' => $this->getId(),
             'brand' => $this->getCarBrand()->getLabel(),
@@ -767,7 +772,8 @@ class CarTH
             'fuel' => $this->getFuel()->getLabel(),
             'annualFuelCost' => $this->getAnnualFuelCost(),
             'annualFuelCostEuro' => $this->getAnnualFuelCostEuro(),
-            'ecoScore' => $this->getEcoScore()
+            'ecoScore' => $this->adjust($this->getEcoScore(), $stats["minEcoscore"], $stats["maxEcoscore"]),
+            'ecoScoreNonAdjusted' => $this->getEcoScore()
         );
     }
 }

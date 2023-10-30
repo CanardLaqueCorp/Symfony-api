@@ -25,7 +25,7 @@ class CarTHController extends AbstractController
                 $carsRes = array();
                 foreach ($cars as $car) {
                     if($data == 'light') {
-                        $carsRes[] = $car->getDataLight();
+                        $carsRes[] = $car->getDataLight($statsGlobal);
                     } else {
                         $carsRes[] = $car->getDataAll($statsGlobal);
                     }
@@ -49,7 +49,7 @@ class CarTHController extends AbstractController
             }
 
             if($data == 'light') {
-                $data = $car->getDataLight();
+                $data = $car->getDataLight($statsGlobal);
             } else {
                 $data = $car->getDataAll($statsGlobal);
             }
