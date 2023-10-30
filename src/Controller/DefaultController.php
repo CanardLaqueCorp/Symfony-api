@@ -22,6 +22,7 @@ class DefaultController extends AbstractController
 
                 $description   = "";
                 $params = array();
+                $attributes = array();
                 
                 switch($route->getPath()) {
                     case "/get/brand/{id}" :
@@ -47,6 +48,58 @@ class DefaultController extends AbstractController
                                 "value" => '"light" or "all"',
                                 "required" => false
                             )
+                        );
+                        break;
+                    case "/search/car/{data}" :
+                        $description = "Searchs cars with specifics criterias. You can pass the attributes in any order, and you can pass only the attributes you want to use. If you don't pass any attribute, it will return all the cars.";
+                        $params = array(
+                            array(
+                                "label" => "data",
+                                "value" => '"light" or "all"',
+                                "required" => false
+                            )
+                        );
+                        $attributes = array(
+                            array(
+                                "label" => "brand",
+                                "value" => 'ID of the brand',
+                            ),
+                            array(
+                                "label" => "fuel",
+                                "value" => 'ID of the fuel',
+                            ),
+                            array(
+                                "label" => "driveSystem",
+                                "value" => 'ID of the driveSystem',
+                            ),
+                            array(
+                                "label" => "carType",
+                                "value" => 'ID of the carType',
+                            ),
+                            array(
+                                "label" => "transmission",
+                                "value" => 'ID of the transmission',
+                            ),
+                            array(
+                                "label" => "startAndStop",
+                                "value" => 'Boolean',
+                            ),
+                            array(
+                                "label" => "gears",
+                                "value" => 'Number of gears',
+                            ),
+                            array(
+                                "label" => "cylinder",
+                                "value" => 'Number of cylinders',
+                            ),
+                            array(
+                                "label" => "minPrice",
+                                "value" => 'Minimum price',
+                            ),
+                            array(
+                                "label" => "maxPrice",
+                                "value" => 'Maximum price',
+                            ),
                         );
                         break;
                     case "/get/prices/{id}" :
@@ -113,7 +166,8 @@ class DefaultController extends AbstractController
                     "path" => $route->getPath(),
                     "controller" => $route->getDefault('_controller'),
                     "description" => $description,
-                    "params" => $params
+                    "params" => $params,
+                    "attributes" => $attributes
                 );
             }
         }

@@ -58,7 +58,7 @@
 
         .description span {
             font-size: 20px;
-            margin-right: 8px;
+            margin-right: 16px;
         }
 
 
@@ -69,7 +69,7 @@
 
         .methods-container .methods {
             display: flex;
-            margin-left: 8px;
+            margin-left: 16px;
             align-items: center;
         }
 
@@ -95,12 +95,14 @@
 
         .params {
             display: flex;
-            margin-left: 8px;
+            flex-wrap: wrap;
+            margin-left: 16px;
         }
 
         .param {
             margin-left: 8px;
             margin-right: 8px;
+            margin-bottom: 16px;
             background: #eee;
             border-radius: 8px;
             overflow: hidden;
@@ -132,7 +134,7 @@
             <div class="path"><div class="copy" onclick="copyToClip('{{ app.request.getSchemeAndHttpHost() ~ '/public' ~ route.path }}')">Copy</div><div>{{ route.path }}</div></div>
             <div class="description"><span>></span> {{ route.description }}</div>
             <div class="methods-container">
-                <div class="label">Methods : </div>
+                <div class="label">Methods</div>
                 <div class="methods">
                     {% for method in route.methods %}
                         <div class="method {{ method }}">{{ method }}</div>
@@ -141,11 +143,24 @@
             </div>
             {% if route.params|length > 0 %}
                 <div class="params-container">
-                    <div class="label">Params : </div>
+                    <div class="label">Params</div>
                     <div class="params">
                         {% for param in route.params %}
                             <div class="param" title="{% if param.required %}Required{% else %}Optional{% endif %}">
                                 <div class="label">{{ param.label }} {% if param.required %}<span>*</span>{% endif %}</div>
+                                <div class="value">{{ param.value }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+             {% if route.attributes|length > 0 %}
+                <div class="params-container">
+                    <div class="label">Attributes</div>
+                    <div class="params">
+                        {% for param in route.attributes %}
+                            <div class="param">
+                                <div class="label">{{ param.label }}</div>
                                 <div class="value">{{ param.value }}</div>
                             </div>
                         {% endfor %}

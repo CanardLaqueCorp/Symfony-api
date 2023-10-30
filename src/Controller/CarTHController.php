@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CarTHRepository;
 use App\Repository\CarPriceRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 class CarTHController extends AbstractController
 {
@@ -79,6 +80,50 @@ class CarTHController extends AbstractController
                 'response' => 'ok',
                 'result' => $res
             ], 200);
+        }
+    }
+
+     /**
+     * @Route("/search/car/{data}", name="search_car", methods={"GET"})
+     */
+    public function searchCar(Request $request, CarTHRepository $carRepo, $data = "all") {
+        $dataGet = $request->query->all();
+        $fuelType = isset($dataGet['fuel']) ? $dataGet['fuel'] : null;
+        $brand = isset($dataGet['brand']) ? $dataGet['brand'] : null;
+        $carType = isset($dataGet['carType']) ? $dataGet['carType'] : null;
+        $hasStartAndStop = isset($dataGet['startAndStop']) ? $dataGet['startAndStop'] : null;
+        $gears = isset($dataGet['gears']) ? $dataGet['gears'] : null;
+        $transmissionType = isset($dataGet['transmission']) ? $dataGet['transmission'] : null;
+        $driveSystem = isset($dataGet['driveSystem']) ? $dataGet['driveSystem'] : null; 
+        $cylinder = isset($dataGet['cylinder']) ? $dataGet['cylinder'] : null;
+        $minPrice = isset($dataGet['minPrice']) ? $dataGet['minPrice'] : null;
+        $maxPrice = isset($dataGet['maxPrice']) ? $dataGet['maxPrice'] : null;
+
+        $cars = $carRepo->searchCar($fuelType, $brand, $carType, $hasStartAndStop, $gears, $transmissionType, $driveSystem, $cylinder, $minPrice, $maxPrice);
+
+        if ($cars == null) {
+            return new JsonResponse(['response' => 'Not found'], 404);
+        }
+        else {
+            if (sizeOf($cars) == 0) {
+                return new JsonResponse(['response' => 'Not found'], 404);
+            } else {
+
+                $statsGlobal = $carRepo->getStatsGlobal();
+                $carsRes = array();
+                foreach ($cars as $car) {
+
+                    if($data == 'light') {
+                        $carsRes[] = $car->getDataLight($statsGlobal);
+                    } else {
+                        $carsRes[] = $car->getDataAll($statsGlobal);
+                    }
+                }
+                return new JsonResponse([
+                    'response' => 'ok',
+                    'result' => $carsRes
+                ], 200);
+            }
         }
     }
 }
