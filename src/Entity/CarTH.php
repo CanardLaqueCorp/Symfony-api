@@ -664,6 +664,9 @@ class CarTH
     }
 
     private function calculateGrade($value, $min, $max) {
+        if($value == null) {
+            return null;
+        }
         $value = $this->adjust($value, $min, $max);
         if ($value >= 80) {
             $grade = 5;
@@ -680,10 +683,28 @@ class CarTH
     }
 
     private function calculateGradeReverse($value, $min, $max) {
+        if($value == null) {
+            return null;
+        }
        return 6 - $this->calculateGrade($value, $min, $max);
     }
     
     public function getDataAll($stats) {
+        $grades = array(
+            'priceUsedGrade' => $this->calculateGradeReverse($this->getPriceUsed(), $stats["minPriceUsed"], $stats["maxPriceUsed"]),
+            'cityFuelGrade' => $this->calculateGrade($this->getCityFuel(), $stats["minCityFuel"], $stats["maxCityFuel"]),
+            'cityCarbonGrade' => $this->calculateGradeReverse($this->getCityCarbon(), $stats["minCityCarbon"], $stats["maxCityCarbon"]),
+            'highwayFuelGrade' => $this->calculateGrade($this->getHighwayFuel(), $stats["minHighwayFuel"], $stats["maxHighwayFuel"]),
+            'highwayCarbonGrade' => $this->calculateGradeReverse($this->getHighwayCarbon(), $stats["minHighwayCarbon"], $stats["maxHighwayCarbon"]),
+            'combinedFuelGrade' => $this->calculateGrade($this->getCombinedFuel(), $stats["minCombinedFuel"], $stats["maxCombinedFuel"]),
+            'combinedCarbonGrade' => $this->calculateGradeReverse($this->getCombinedCarbon(), $stats["minCombinedCarbon"], $stats["maxCombinedCarbon"]),
+            'annualFuelCostGrade' => $this->calculateGradeReverse($this->getAnnualFuelCost(), $stats["minAnnualFuelCost"], $stats["maxAnnualFuelCost"]),
+            'spendOnFiveYearsGrade' => $this->calculateGradeReverse($this->getSpendOnFiveYears(), $stats["minSpendOnFiveYears"], $stats["maxSpendOnFiveYears"]),
+            'feRatingGrade' => $this->calculateGrade($this->getFeRating(), $stats["minFeRating"], $stats["maxFeRating"]),
+            'ghgRatingGrade' => $this->calculateGrade($this->getGhgRating(), $stats["minGhgRating"], $stats["maxGhgRating"]),
+            'smogRatingGrade' => $this->calculateGrade($this->getSmogRating(), $stats["minSmogRating"], $stats["maxSmogRating"]),
+        );
+
         return array(
             'id' => $this->getId(),
             'brandId' => $this->getCarBrand()->getId(),
@@ -695,7 +716,6 @@ class CarTH
             
             'priceUsed' => $this->getPriceUsed(),
             'priceUsedEuro' => $this->getPriceUsedEuro(),
-            // priceUsedGarde
 
             'cylinder' => $this->getCylinder(),
             'transmissionTypeId' => $this->getTransmissionType()->getId(),
@@ -715,49 +735,40 @@ class CarTH
             
             'cityFuel' => $this->getCityFuel(),
             'cityFuelMetric' => $this->getCityFuelMetric(),   
-            // cityFuelGrade
             
             'cityCarbon' => $this->getCityCarbon(),
             'cityCarbonMetric' => $this->getCityCarbonMetric(),
-            // cityCarbonGrade
 
             'highwayFuel' => $this->getHighwayFuel(),
             'highwayFuelMetric' => $this->getHighwayFuelMetric(),
-            // highwayFuelGrade
 
             'highwayCarbon' => $this->getHighwayCarbon(),
             'highwayCarbonMetric' => $this->getHighwayCarbonMetric(),
-            // highwayCarbonGrade
             
             'combinedFuel' => $this->getCombinedFuel(),
             'combinedFuelMetric' => $this->getCombinedFuelMetric(),
-            'combinedFuelGrade' => $this->calculateGrade($this->getCombinedFuel(), $stats["minCombinedFuel"], $stats["maxCombinedFuel"]),
 
             'combinedCarbon' => $this->getCombinedCarbon(),
             'combinedCarbonMetric' => $this->getCombinedCarbonMetric(),
-            // combinedCarbonGrade
 
             'hasGuzzler' => $this->hasGuzzler(),
 
             'annualFuelCost' => $this->getAnnualFuelCost(),
             'annualFuelCostEuro' => $this->getAnnualFuelCostEuro(),
-            // annualFuelCostGrade
 
             'spendOnFiveYears' => $this->getSpendOnFiveYears(),
             'spendOnFiveYearsEuro' => $this->getSpendOnFiveYearsEuro(),
-            // spendOnFiveYearsGrade
 
             'feRating' => $this->getFeRating(),
-            // feRatingGrade
 
             'ghgRating' => $this->getGhgRating(),
-            // ghgRatingGrade
 
             'smogRating' => $this->getSmogRating(),
-            // smogRatingGrade
 
             'ecoScore' => $this->adjust($this->getEcoScore(), $stats["minEcoscore"], $stats["maxEcoscore"]),
-            'ecoScoreNonAdjusted' => $this->getEcoScore()
+            'ecoScoreNonAdjusted' => $this->getEcoScore(),
+
+            'grades' => $grades
         );
     }
 
