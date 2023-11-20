@@ -199,6 +199,11 @@ class CarTH
      */
     private $combinedCarbonMetric;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $views;
+
     public function __construct()
     {
         $this->carPrices = new ArrayCollection();
@@ -765,6 +770,7 @@ class CarTH
             'feRating' => $this->getFeRating(),
             'ghgRating' => $this->getGhgRating(),
             'smogRating' => $this->getSmogRating(),
+            'views' => $this->getViews(),
             'ecoScore' => $this->adjust($this->getEcoScore(), $stats["minEcoscore"], $stats["maxEcoscore"]),
             'ecoScoreNonAdjusted' => $this->getEcoScore(),
             'grades' => $grades,
@@ -784,7 +790,20 @@ class CarTH
             'annualFuelCost' => $this->getAnnualFuelCost(),
             'annualFuelCostEuro' => $this->getAnnualFuelCostEuro(),
             'ecoScore' => $this->adjust($this->getEcoScore(), $stats["minEcoscore"], $stats["maxEcoscore"]),
-            'ecoScoreNonAdjusted' => $this->getEcoScore()
+            'ecoScoreNonAdjusted' => $this->getEcoScore(),
+            'views' => $this->getViews()
         );
+    }
+
+    public function getViews(): ?int
+    {
+        return $this->views;
+    }
+
+    public function setViews(int $views): self
+    {
+        $this->views = $views;
+
+        return $this;
     }
 }

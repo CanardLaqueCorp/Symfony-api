@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CarTHRepository;
 use App\Repository\CarPriceRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 
 class CarTHController extends AbstractController
 {
@@ -15,7 +16,7 @@ class CarTHController extends AbstractController
     /**
      * @Route("/get/car/{id}/{data}", name="get_car_by_id", methods={"GET"})
      */
-    public function getById(CarTHRepository $carRepo, $id = "all", $data = "all"): JsonResponse
+    public function getById(EntityManagerInterface $entityManager,CarTHRepository $carRepo, $id = "all", $data = "all"): JsonResponse
     {
         $statsGlobal = $carRepo->getStatsGlobal();
 
@@ -48,6 +49,10 @@ class CarTHController extends AbstractController
             if($car == null) {
                 return new JsonResponse(['response' => 'Not found'], 404);
             }
+
+            $car->setViews($car->getViews() + 1);
+            $entityManager->persist($car);
+            $entityManager->flush();
 
             if($data == 'light') {
                 $data = $car->getDataLight($statsGlobal);
