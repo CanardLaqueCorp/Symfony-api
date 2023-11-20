@@ -48,12 +48,12 @@ class CarTHRepository extends ServiceEntityRepository
             "maxAnnualFuelCost" => $cars[0]->getAnnualFuelCost(),
             "minSpendOnFiveYears" => $cars[0]->getSpendOnFiveYears(),
             "maxSpendOnFiveYears" => $cars[0]->getSpendOnFiveYears(),
-            "minFeRating" => $cars[0]->getFeRating(),
-            "maxFeRating" => $cars[0]->getFeRating(),
-            "minGhgRating" => $cars[0]->getGhgRating(),
-            "maxGhgRating" => $cars[0]->getGhgRating(),
-            "minSmogRating" => $cars[0]->getSmogRating(),
-            "maxSmogRating" => $cars[0]->getSmogRating(),
+            "minFeRating" => 1,
+            "maxFeRating" => 10,
+            "minGhgRating" => 1,
+            "maxGhgRating" => 10,
+            "minSmogRating" => 1,
+            "maxSmogRating" => 10,
         );
 
         foreach($cars as $car) {
@@ -123,27 +123,6 @@ class CarTHRepository extends ServiceEntityRepository
             }
             if ($car->getSpendOnFiveYears() > $statsGlobal["maxSpendOnFiveYears"]) {
                 $statsGlobal["maxSpendOnFiveYears"] = $car->getSpendOnFiveYears();
-            }
-
-            if ($car->getFeRating() < $statsGlobal["minFeRating"]) {
-                $statsGlobal["minFeRating"] = $car->getFeRating();
-            }
-            if ($car->getFeRating() > $statsGlobal["maxFeRating"]) {
-                $statsGlobal["maxFeRating"] = $car->getFeRating();
-            }
-
-            if ($car->getGhgRating() < $statsGlobal["minGhgRating"]) {
-                $statsGlobal["minGhgRating"] = $car->getGhgRating();
-            }
-            if ($car->getGhgRating() > $statsGlobal["maxGhgRating"]) {
-                $statsGlobal["maxGhgRating"] = $car->getGhgRating();
-            }
-
-            if ($car->getSmogRating() < $statsGlobal["minSmogRating"]) {
-                $statsGlobal["minSmogRating"] = $car->getSmogRating();
-            }
-            if ($car->getSmogRating() > $statsGlobal["maxSmogRating"]) {
-                $statsGlobal["maxSmogRating"] = $car->getSmogRating();
             }
         }
 

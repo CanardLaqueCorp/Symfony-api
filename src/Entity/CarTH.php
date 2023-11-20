@@ -705,6 +705,19 @@ class CarTH
             'smogRatingGrade' => $this->calculateGrade($this->getSmogRating(), $stats["minSmogRating"], $stats["maxSmogRating"]),
         );
 
+        $graphs = array(
+            'cityFuelGraph' => $this->adjust($this->getCityFuel(), $stats["minCityFuel"], $stats["maxCityFuel"]),
+            'cityCarbonGraph' => 100 - $this->adjust($this->getCityCarbon(), $stats["minCityCarbon"], $stats["maxCityCarbon"]),
+            'highwayFuelGraph' => $this->adjust($this->getHighwayFuel(), $stats["minHighwayFuel"], $stats["maxHighwayFuel"]),
+            'highwayCarbonGraph' => 100 - $this->adjust($this->getHighwayCarbon(), $stats["minHighwayCarbon"], $stats["maxHighwayCarbon"]),
+            'combinedFuelGraph' => $this->adjust($this->getCombinedFuel(), $stats["minCombinedFuel"], $stats["maxCombinedFuel"]),
+            'combinedCarbonGraph' => 100 - $this->adjust($this->getCombinedCarbon(), $stats["minCombinedCarbon"], $stats["maxCombinedCarbon"]),
+            'feRatingGraph' => $this->adjust($this->getFeRating(), $stats["minFeRating"], $stats["maxFeRating"]),
+            'ghgRatingGraph' => $this->adjust($this->getGhgRating(), $stats["minGhgRating"], $stats["maxGhgRating"]),
+            'smogRatingGraph' => $this->adjust($this->getSmogRating(), $stats["minSmogRating"], $stats["maxSmogRating"]),
+            'ecoScoreGraph' => $this->getEcoScore()
+        );
+
         return array(
             'id' => $this->getId(),
             'brandId' => $this->getCarBrand()->getId(),
@@ -713,10 +726,8 @@ class CarTH
             'carTypeId' => $this->getCarType()->getId(),
             'carType' => $this->getCarType()->getLabel(),
             'priceNew' => $this->getPriceNew(),
-            
             'priceUsed' => $this->getPriceUsed(),
             'priceUsedEuro' => $this->getPriceUsedEuro(),
-
             'cylinder' => $this->getCylinder(),
             'transmissionTypeId' => $this->getTransmissionType()->getId(),
             'transmissionTypeCode' => $this->getTransmissionType()->getCode(),
@@ -732,43 +743,30 @@ class CarTH
             'fuelDetail' => $this->getFuel()->getDetail(),
             'maxBioFuel' => $this->getMaxBioFuel(),
             'hasStartAndStop' => $this->hasStartAndStop(),
-            
             'cityFuel' => $this->getCityFuel(),
             'cityFuelMetric' => $this->getCityFuelMetric(),   
-            
             'cityCarbon' => $this->getCityCarbon(),
             'cityCarbonMetric' => $this->getCityCarbonMetric(),
-
             'highwayFuel' => $this->getHighwayFuel(),
             'highwayFuelMetric' => $this->getHighwayFuelMetric(),
-
             'highwayCarbon' => $this->getHighwayCarbon(),
             'highwayCarbonMetric' => $this->getHighwayCarbonMetric(),
-            
             'combinedFuel' => $this->getCombinedFuel(),
             'combinedFuelMetric' => $this->getCombinedFuelMetric(),
-
             'combinedCarbon' => $this->getCombinedCarbon(),
             'combinedCarbonMetric' => $this->getCombinedCarbonMetric(),
-
             'hasGuzzler' => $this->hasGuzzler(),
-
             'annualFuelCost' => $this->getAnnualFuelCost(),
             'annualFuelCostEuro' => $this->getAnnualFuelCostEuro(),
-
             'spendOnFiveYears' => $this->getSpendOnFiveYears(),
             'spendOnFiveYearsEuro' => $this->getSpendOnFiveYearsEuro(),
-
             'feRating' => $this->getFeRating(),
-
             'ghgRating' => $this->getGhgRating(),
-
             'smogRating' => $this->getSmogRating(),
-
             'ecoScore' => $this->adjust($this->getEcoScore(), $stats["minEcoscore"], $stats["maxEcoscore"]),
             'ecoScoreNonAdjusted' => $this->getEcoScore(),
-
-            'grades' => $grades
+            'grades' => $grades,
+            'graphs' => $graphs
         );
     }
 
