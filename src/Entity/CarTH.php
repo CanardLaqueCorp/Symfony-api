@@ -703,6 +703,7 @@ class CarTH
             'feRatingGrade' => $this->calculateGrade($this->getFeRating(), $stats["minFeRating"], $stats["maxFeRating"]),
             'ghgRatingGrade' => $this->calculateGrade($this->getGhgRating(), $stats["minGhgRating"], $stats["maxGhgRating"]),
             'smogRatingGrade' => $this->calculateGrade($this->getSmogRating(), $stats["minSmogRating"], $stats["maxSmogRating"]),
+            'bioFuelGrade' => $this->calculateGrade($this->getMaxBioFuel(), $stats["minBiofuel"], $stats["maxBiofuel"]),
         );
 
         $graphs = array(
@@ -715,7 +716,8 @@ class CarTH
             'feRatingGraph' => $this->adjust($this->getFeRating(), $stats["minFeRating"], $stats["maxFeRating"]),
             'ghgRatingGraph' => $this->adjust($this->getGhgRating(), $stats["minGhgRating"], $stats["maxGhgRating"]),
             'smogRatingGraph' => $this->adjust($this->getSmogRating(), $stats["minSmogRating"], $stats["maxSmogRating"]),
-            'ecoScoreGraph' => $this->getEcoScore()
+            'ecoScoreGraph' => $this->getEcoScore(),
+            'bioFuelGraph' => $this->adjust($this->getMaxBioFuel(), $stats["minBiofuel"], $stats["maxBiofuel"]),
         );
 
         return array(

@@ -54,6 +54,8 @@ class CarTHRepository extends ServiceEntityRepository
             "maxGhgRating" => 10,
             "minSmogRating" => 1,
             "maxSmogRating" => 10,
+            "minBiofuel" => 0,
+            "maxBiofuel" => $cars[0]->getMaxBiofuel(),
         );
 
         foreach($cars as $car) {
@@ -123,6 +125,10 @@ class CarTHRepository extends ServiceEntityRepository
             }
             if ($car->getSpendOnFiveYears() > $statsGlobal["maxSpendOnFiveYears"]) {
                 $statsGlobal["maxSpendOnFiveYears"] = $car->getSpendOnFiveYears();
+            }
+
+            if ($car->getMaxBioFuel() > $statsGlobal["maxBiofuel"]) {
+                $statsGlobal["maxBiofuel"] = $car->getMaxBioFuel();
             }
         }
 
