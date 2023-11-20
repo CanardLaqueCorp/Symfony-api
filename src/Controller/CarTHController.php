@@ -90,11 +90,11 @@ class CarTHController extends AbstractController
         $dataGet = $request->query->all();
         $fuelType = isset($dataGet['fuel']) ? $dataGet['fuel'] : null;
         $brand = isset($dataGet['brand']) ? $dataGet['brand'] : null;
-        $carType = isset($dataGet['carType']) ? $dataGet['carType'] : null;
-        $hasStartAndStop = isset($dataGet['startAndStop']) ? $dataGet['startAndStop'] : null;
+        $carType = isset($dataGet['cartype']) ? $dataGet['cartype'] : null;
+        $hasStartAndStop = isset($dataGet['startandstop']) ? $dataGet['startandstop'] : null;
         $gears = isset($dataGet['gears']) ? $dataGet['gears'] : null;
         $transmissionType = isset($dataGet['transmission']) ? $dataGet['transmission'] : null;
-        $driveSystem = isset($dataGet['driveSystem']) ? $dataGet['driveSystem'] : null; 
+        $driveSystem = isset($dataGet['drivesystem']) ? $dataGet['drivesystem'] : null; 
         $cylinder = isset($dataGet['cylinder']) ? $dataGet['cylinder'] : null;
         $minPrice = isset($dataGet['minPrice']) ? $dataGet['minPrice'] : null;
         $maxPrice = isset($dataGet['maxPrice']) ? $dataGet['maxPrice'] : null;
