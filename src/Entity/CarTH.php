@@ -664,10 +664,12 @@ class CarTH
         return $this;
     }
 
+    // Returns the position of a value (in %) between a min and a max
     private function adjust($value, $min, $max) {
         return intval(100 * ($value - $min) / ($max - $min));
     }
 
+    // Returns the grade of a value between a min and a max (the higher the value, the higher the grade)
     private function calculateGrade($value, $min, $max) {
         if($value == null) {
             return null;
@@ -687,6 +689,7 @@ class CarTH
         return $grade;
     }
 
+    // Returns the grade of a value between a min and a max (the higher the value, the lower the grade)
     private function calculateGradeReverse($value, $min, $max) {
         if($value == null) {
             return null;

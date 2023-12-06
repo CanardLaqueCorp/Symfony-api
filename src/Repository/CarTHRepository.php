@@ -21,6 +21,8 @@ class CarTHRepository extends ServiceEntityRepository
         parent::__construct($registry, CarTH::class);
     }
 
+
+    // Returns the min and max values of each field of the cars
     public function getStatsGlobal(): array
     {
         $cars = $this->findAll();
@@ -140,6 +142,7 @@ class CarTHRepository extends ServiceEntityRepository
         return $statsGlobal;
     }
 
+    // Search cars by criteria
     public function searchCar($fuelType, $brand, $carType, $hasStartAndStop, $gears, $transmissionType, $driveSystem, $cylinder, $minPrice, $maxPrice) {
         $r = $this->createQueryBuilder('carTH');
         // if ($fuelType != null) {

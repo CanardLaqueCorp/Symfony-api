@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\BrandRepository;
 
+
+// Returns a brand by id or all brands
+
 class BrandController extends AbstractController
 {
     /**
@@ -15,6 +18,8 @@ class BrandController extends AbstractController
     public function getById(BrandRepository $brandRepo, $id = "all"): JsonResponse
     {
         if ($id == "all") {
+            
+            // Get all brands
             $brands = $brandRepo->findAll([], ['label' => 'ASC']);
 
             if ($brands != null) {
@@ -33,6 +38,7 @@ class BrandController extends AbstractController
         }
         else {
 
+            // Get brand by id
             $brand = $brandRepo->find($id);
             
             if($brand == null) {

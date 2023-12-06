@@ -9,12 +9,17 @@ use App\Repository\FuelRepository;
 
 class FuelController extends AbstractController
 {
+
+    // Returns a fuel by id or all fuels
+
     /**
      * @Route("/get/fuel/{id}", name="get_fuel_by_id", methods={"GET"})
      */
     public function getById(FuelRepository $fuelRepo, $id = "all"): JsonResponse
     {
         if ($id == "all") {
+
+            // Get all fuels
             $fuels = $fuelRepo->findAll([], ['label' => 'ASC']);
 
             if ($fuels != null) {
@@ -33,6 +38,7 @@ class FuelController extends AbstractController
         }
         else {
 
+            // Get fuel by id
             $fuel = $fuelRepo->find($id);
             
             if($fuel == null) {

@@ -11,6 +11,9 @@ use App\Repository\CarTypeRepository;
 
 class StatController extends AbstractController
 {
+
+    // Returnsthe count of cars, brands and types
+
     /**
      * @Route("/get/stats", name="get_stats", methods={"GET"})
      */
@@ -33,6 +36,9 @@ class StatController extends AbstractController
             ]
         ], 200);
     }
+
+    // Returns the min and max values of car data
+
     /**
      * @Route("/get/data/max", name="get_data_max", methods={"GET"})
      */

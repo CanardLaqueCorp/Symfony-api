@@ -13,6 +13,8 @@ use Doctrine\ORM\EntityManagerInterface;
 class CarTHController extends AbstractController
 {
 
+    // Returns a car by id or all cars
+
     /**
      * @Route("/get/car/{id}/{data}", name="get_car_by_id", methods={"GET"})
      */
@@ -21,6 +23,8 @@ class CarTHController extends AbstractController
         $statsGlobal = $carRepo->getStatsGlobal();
 
         if ($id == "all") {
+
+            // Get all cars
             $cars = $carRepo->findBy([], ['ecoScore' => 'DESC']);
 
             if ($cars != null) {
@@ -44,6 +48,7 @@ class CarTHController extends AbstractController
         }
         else {
 
+            // Get car by id
             $car = $carRepo->find($id);
             
             if($car == null) {

@@ -9,12 +9,17 @@ use App\Repository\TransmissionRepository;
 
 class TransmissionController extends AbstractController
 {
+
+    // Returns a transmission by id or all transmissions
+
     /**
      * @Route("/get/transmission/{id}", name="get_transmission_by_id", methods={"GET"})
      */
     public function getById(TransmissionRepository $transmissionRepo, $id = "all"): JsonResponse
     {
         if ($id == "all") {
+
+            // Get all transmissions
             $transmissions = $transmissionRepo->findAll([], ['label' => 'ASC']);
 
             if ($transmissions != null) {
@@ -33,6 +38,7 @@ class TransmissionController extends AbstractController
         }
         else {
 
+            // Get transmission by id
             $transmission = $transmissionRepo->find($id);
             
             if($transmission == null) {

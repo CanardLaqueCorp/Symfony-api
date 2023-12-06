@@ -9,12 +9,17 @@ use App\Repository\CarTypeRepository;
 
 class CarTypeController extends AbstractController
 {
+
+    // Returns a car type by id or all car types
+
     /**
      * @Route("/get/type/{id}", name="get_type_by_id", methods={"GET"})
      */
     public function getById(CarTypeRepository $carTypeRepo, $id = "all"): JsonResponse
     {
         if ($id == "all") {
+
+            // Get all car types
             $carTypes = $carTypeRepo->findAll([], ['label' => 'ASC']);
 
             if ($carTypes != null) {
@@ -33,6 +38,7 @@ class CarTypeController extends AbstractController
         }
         else {
 
+            // Get car type by id
             $carType = $carTypeRepo->find($id);
             
             if($carType == null) {

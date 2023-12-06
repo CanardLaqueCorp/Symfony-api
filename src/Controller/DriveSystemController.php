@@ -9,12 +9,17 @@ use  App\Repository\DriveSystemRepository;
 
 class DriveSystemController extends AbstractController
 {
+
+    // Returns a drive system by id or all drive systems
+
     /**
      * @Route("/get/drive/system/{id}", name="get_drive_system_by_id", methods={"GET"})
      */
     public function getById(DriveSystemRepository $driveSystemRepo, $id = "all"): JsonResponse
     {
         if ($id == "all") {
+
+            // Get all drive systems
             $driveSystems = $driveSystemRepo->findAll([], ['label' => 'ASC']);
 
             if ($driveSystems != null) {
@@ -33,6 +38,7 @@ class DriveSystemController extends AbstractController
         }
         else {
 
+            // Get drive system by id
             $driveSystem = $driveSystemRepo->find($id);
             
             if($driveSystem == null) {
