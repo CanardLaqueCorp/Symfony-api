@@ -26,7 +26,7 @@ class CarTHController extends AbstractController
         if ($id == "all") {
 
             // Get all cars
-            $cars = $carRepo->find([], ['ecoScore' => 'DESC']);
+            $cars = $carRepo->findBy([], ['ecoScore' => 'DESC']);
 
             if ($cars != null) {
                 $carsRes = array();
