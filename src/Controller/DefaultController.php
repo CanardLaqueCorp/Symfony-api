@@ -159,7 +159,9 @@ class DefaultController extends AbstractController
                     case "/get/data/max" :
                         $description = "Returns the worst values of the data of the cars in the database";
                         break;
-                    
+                    case "/get/top/cars":
+                        $description = "Returns the top 10 cars with the most views";
+                        break;
                 }
 
                 $data[] = array(

@@ -95,6 +95,29 @@ class CarTHController extends AbstractController
     }
 
      /**
+     * @Route("/get/top/cars", name="get_top_cars", methods={"GET"})
+     */
+    public function getTopCars(CarTHRepository $carRepo) {
+        $cars = $carRepo->findBy([], ['views' => 'DESC'], 10);
+        $statsGlobal = $carRepo->getStatsGlobal();
+
+        if ($cars != null) {
+            $carsRes = array();
+            foreach ($cars as $car) {
+                $carsRes[] = $car->getDataLight($statsGlobal);
+            }
+
+            return new JsonResponse([
+                'response' => 'ok',
+                'result' => $carsRes
+            ], 200);
+        }
+        else {
+            return new JsonResponse(['response' => 'Not found'], 404);
+        }
+    }
+
+     /**
      * @Route("/search/car/{data}", name="search_car", methods={"GET"})
      */
     public function searchCar(Request $request, CarTHRepository $carRepo, FuelRepository $fuelRepo, $data = "all") {
