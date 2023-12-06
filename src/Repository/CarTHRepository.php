@@ -143,12 +143,13 @@ class CarTHRepository extends ServiceEntityRepository
     }
 
     // Search cars by criteria
-    public function searchCar($fuelType, $brand, $carType, $hasStartAndStop, $gears, $transmissionType, $driveSystem, $cylinder, $minPrice, $maxPrice) {
+    public function searchCar($fuelTypes, $brand, $carType, $hasStartAndStop, $gears, $transmissionType, $driveSystem, $cylinder, $minPrice, $maxPrice) {
         $r = $this->createQueryBuilder('carTH');
-        // if ($fuelType != null) {
-        //     $r->andWhere('carTH.carFuel = :fuelType')
-        //     ->setParameter('fuelType', $fuelType);
-        // }
+
+        if ($fuelTypes != null) {
+            $r->andWhere('carTH.carFuel IN (:fuelTypes)')
+            ->setParameter('fuelTypes', $fuelTypes);
+        }
         if ($brand != null) {
             $r->andWhere('carTH.carBrand = :brand')
             ->setParameter('brand', $brand);

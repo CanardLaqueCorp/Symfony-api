@@ -22,10 +22,18 @@ class FuelController extends AbstractController
             // Get all fuels
             $fuels = $fuelRepo->findAll([], ['label' => 'ASC']);
 
+            $fuelCategories = array();
+
             if ($fuels != null) {
                 $fuelsRes = array();
                 foreach ($fuels as $fuel) {
-                    $fuelsRes[] = $fuel->getDataAll();
+                    if(!in_array($fuel->getLabel(), $fuelCategories)) {
+                        $fuelCategories[] = $fuel->getLabel();
+                        $fuelsRes[] = array(
+                            "id" => $fuel->getId(),
+                            "label" => $fuel->getLabel(),
+                        );
+                    }
                 }
                 return new JsonResponse([
                     'response' => 'ok',

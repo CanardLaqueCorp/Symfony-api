@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CarTHRepository;
 use App\Repository\CarPriceRepository;
+use App\Repository\FuelRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -25,7 +26,7 @@ class CarTHController extends AbstractController
         if ($id == "all") {
 
             // Get all cars
-            $cars = $carRepo->findBy([], ['ecoScore' => 'DESC']);
+            $cars = $carRepo->find([], ['ecoScore' => 'DESC']);
 
             if ($cars != null) {
                 $carsRes = array();
@@ -96,9 +97,8 @@ class CarTHController extends AbstractController
      /**
      * @Route("/search/car/{data}", name="search_car", methods={"GET"})
      */
-    public function searchCar(Request $request, CarTHRepository $carRepo, $data = "all") {
+    public function searchCar(Request $request, CarTHRepository $carRepo, FuelRepository $fuelRepo, $data = "all") {
         $dataGet = $request->query->all();
-        $fuelType = isset($dataGet['fuel']) ? $dataGet['fuel'] : null;
         $brand = isset($dataGet['brand']) ? $dataGet['brand'] : null;
         $carType = isset($dataGet['cartype']) ? $dataGet['cartype'] : null;
         $hasStartAndStop = isset($dataGet['startandstop']) ? $dataGet['startandstop'] : null;
@@ -108,8 +108,20 @@ class CarTHController extends AbstractController
         $cylinder = isset($dataGet['cylinder']) ? $dataGet['cylinder'] : null;
         $minPrice = isset($dataGet['minPrice']) ? $dataGet['minPrice'] : null;
         $maxPrice = isset($dataGet['maxPrice']) ? $dataGet['maxPrice'] : null;
+        
+        if (isset ($dataGet['fuel'])) {
+            $fuelsIds = $fuelRepo->findBy(['label' => $dataGet['fuel']]);
 
-        $cars = $carRepo->searchCar($fuelType, $brand, $carType, $hasStartAndStop, $gears, $transmissionType, $driveSystem, $cylinder, $minPrice, $maxPrice);
+            $fuelTypes = array();
+            foreach ($fuelsIds as $f) {
+                $fuelTypes[] = $f->getId();
+            }
+        }
+        else {
+            $fuelTypes = null;
+        }
+
+        $cars = $carRepo->searchCar($fuelTypes, $brand, $carType, $hasStartAndStop, $gears, $transmissionType, $driveSystem, $cylinder, $minPrice, $maxPrice);
 
         if ($cars == null) {
             return new JsonResponse(['response' => 'Not found'], 404);
